@@ -1,0 +1,9 @@
+Bootstrap spacing via class:
+https://mdbootstrap.com/docs/react/utilities/spacing/
+
+React bootstrap navbars:
+https://react-bootstrap.github.io/components/navbar/
+
+Installed for project:
+npm install react-router-dom --save
+npm install react-bootstrap bootstrap --save 
