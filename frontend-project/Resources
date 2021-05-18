@@ -7,3 +7,9 @@ https://react-bootstrap.github.io/components/navbar/
 Installed for project:
 npm install react-router-dom --save
 npm install react-bootstrap bootstrap --save 
+
+Main API for querying for movies/TV shows:
+OMDb API
+Note:
+Use s=title to get multiple results, t=title to get a 
+specific movie result, or i=id to use the id to query
