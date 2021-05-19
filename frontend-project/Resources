@@ -15,3 +15,11 @@ Note:
       specific movie result, or i=id to use the id to query
     - My API key is &apikey=5371282f which we should append
       to the end of every query we make to the OMDb API
+
+Secondary API for querying for movies/TV shows:
+The Movie Database API
+https://www.themoviedb.org/
+Note:
+  - API key is ?api_key=b0011e93f013cfbed3110a3729a3e3c5
+  - This allows us to query for things such as top rated movies,
+    popular movies, etc.

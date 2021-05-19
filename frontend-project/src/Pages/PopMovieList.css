@@ -1,0 +1,44 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 5px;
+  padding: 0;
+}
+
+section h1 {
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+figure {
+  height: 5%;
+  width: 250px;
+  padding: 10px 10px;
+}
+
+#grid-item:hover,
+#grid-item:focus {
+  background-color: rgb(136, 136, 136);
+  color: white;
+}
+
+.grid-container {
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+img {
+  height: 300px;
+  width: 225px;
+}
+
+figcaption {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.5em;
+}
