@@ -19,6 +19,7 @@ export default function Results() {
       .then((res) => res.json())
       .then((res) => {
         // example of how to get the search results from response
+        setResults(res["Search"]);
         console.log(res["Search"]);
 
         // example of how to get a singular result from the response
@@ -28,7 +29,7 @@ export default function Results() {
         if (result) setLoading(false);
       })
       .catch((error) => console.log("fetch error:", error));
-  }, []);
+  }, [resultsArray]]);
 
   // Give user some visual feedback while we are waiting on our request to return
   if (isLoading && search !== "") {
