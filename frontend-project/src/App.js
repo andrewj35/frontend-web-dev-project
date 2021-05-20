@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { Home, Results, NotFound } from "./Pages";
 import {
   Navbar,
@@ -55,8 +55,8 @@ class Main extends React.Component {
   handleSearchSubmit = () => {
     if (this.state.searchText) {
       params = this.state.searchText;
-      this.props.history.push({
-        pathname: "results",
+      this.props.history.replace({
+        pathname: "/results",
       });
     } else {
       alert("Please enter text in search bar!");
@@ -89,7 +89,7 @@ class Main extends React.Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav id="nav" className="mr-auto">
-              <Nav.Link onClick={this.handleRoute("/")}>Home</Nav.Link>
+              <Nav.Link href="/movies/">Home</Nav.Link>
               <NavDropdown title="Categories" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Option 1</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Option 2</NavDropdown.Item>
@@ -100,6 +100,7 @@ class Main extends React.Component {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
+
             <Form id="search-form" inline onSubmit={this.afterSubmission}>
               <FormGroup controlId="header-search">
                 <FormControl
@@ -119,7 +120,9 @@ class Main extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Redirect exact from="/" to="/movies/" />
+          <Redirect exact path="/movies/" to="/movies/1" />
+          <Route exact path="/movies/:pageNumber" component={Home} />
           <Route exact path="/results" component={Results} />
           {/* need to figure out how to expect url query params before adding 404 page */}
           <Route component={NotFound} />
