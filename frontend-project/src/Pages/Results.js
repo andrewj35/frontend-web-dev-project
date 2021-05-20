@@ -23,10 +23,10 @@ export default function Results() {
         console.log(res["Search"]);
 
         // example of how to get a singular result from the response
-        result = res["Search"][0]["Title"];
+        // result = res["Search"][0]["Title"];
 
         // if the request has returned data we can use
-        if (result) setLoading(false);
+        if (resultsArray) setLoading(false);
       })
       .catch((error) => console.log("fetch error:", error));
   }, [resultsArray]]);
