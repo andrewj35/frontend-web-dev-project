@@ -1,8 +1,32 @@
 
-.cardList {
-    display : flex;
-    flex-direction: row;
+.cardList { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap:no-wrap;
     justify-content: center;
     text-align: center;
-
+    
 }
+/* .cardList:hover {
+    transform: scale(1.05);
+    background-color: rgb(14, 13, 13);
+    
+} */
+
+.card-container {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    
+   
+}
+
+/* .card-container:hover {
+    transform: scale(1.05);
+    background-color: rgb(14, 13, 13);
+}
+
+.image {
+    height: 70%;
+} */
