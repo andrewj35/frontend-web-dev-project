@@ -6,11 +6,11 @@ export default function MovieCard(props) {
 
     let { each } = props;
     return (
-        <div className='cardList'>
+        <div className='card-container'>
             <div className = "card">
                 <h1>{each.Title} ({each.Year})</h1>
-                <p>Weapon of choice: {each.imdbID}</p>
-                <img src={each.Poster} alt={`${each.Title}`} width="200" />
+                <p>IMDB rating: {each.imdbID}</p>
+                <img style = {{marginLeft:'40%'}}src={each.Poster} alt={`${each.Title}`} width="200" />
                 <hr />
             </div>
 
