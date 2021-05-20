@@ -1,9 +1,9 @@
 import { params } from "../App";
 import "./Results.css";
 import { useState, useEffect } from "react";
-import MovieCard from '../Components/movieCard';
+import MovieCard from "./movieCard";
+
 let search = "";
-let result;
 
 export default function Results() {
   // Check if we are searching for the first time or a new search
@@ -13,7 +13,6 @@ export default function Results() {
 
   const [isLoading, setLoading] = useState(true);
   const [resultsArray, setResults] = useState([]);
-
 
   useEffect(() => {
     fetch("https://www.omdbapi.com/?s=" + search + "&apikey=5371282f")
@@ -51,9 +50,9 @@ export default function Results() {
 
   return (
     <div>
-    {resultsArray.map(each =>
-     <MovieCard each= {each} />
-    )}
-  </div>
-  )
+      {resultsArray.map((each) => (
+        <MovieCard each={each} />
+      ))}
+    </div>
+  );
 }
