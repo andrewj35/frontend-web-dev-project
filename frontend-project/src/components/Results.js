@@ -1,7 +1,7 @@
 import { params } from "../App";
 import "./Results.css";
 import { useState, useEffect } from "react";
-
+import MovieCard from '../Components/movieCard';
 let search = "";
 let result;
 
@@ -12,22 +12,25 @@ export default function Results() {
   }
 
   const [isLoading, setLoading] = useState(true);
+  const [resultsArray, setResults] = useState([]);
+
 
   useEffect(() => {
     fetch("https://www.omdbapi.com/?s=" + search + "&apikey=5371282f")
       .then((res) => res.json())
       .then((res) => {
         // example of how to get the search results from response
+        setResults(res["Search"]);
         console.log(res["Search"]);
 
         // example of how to get a singular result from the response
-        result = res["Search"][0]["Title"];
+        // result = res["Search"][0]["Title"];
 
         // if the request has returned data we can use
-        if (result) setLoading(false);
+        if (resultsArray) setLoading(false);
       })
       .catch((error) => console.log("fetch error:", error));
-  }, []);
+  }, [resultsArray]);
 
   // Give user some visual feedback while we are waiting on our request to return
   if (isLoading && search !== "") {
@@ -48,8 +51,9 @@ export default function Results() {
 
   return (
     <div>
-      <h1>Results</h1>
-      <h2>{result}</h2>
-    </div>
-  );
+    {resultsArray.map(each =>
+     <MovieCard each= {each} />
+    )}
+  </div>
+  )
 }
