@@ -1,6 +1,7 @@
 import { params } from "../App";
 import "./Results.css";
 import { useState, useEffect } from "react";
+import MovieCard from '../Components/movieCard';
 let search = "";
 let result;
 
@@ -52,6 +53,7 @@ export default function Results() {
     <div>
       <h1>Results</h1>
       <h2>{result}</h2>
+      <MovieCard />
     </div>
   );
 }
