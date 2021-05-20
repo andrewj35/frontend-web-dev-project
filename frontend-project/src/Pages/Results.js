@@ -30,7 +30,7 @@ export default function Results() {
         if (resultsArray) setLoading(false);
       })
       .catch((error) => console.log("fetch error:", error));
-  }, [resultsArray]]);
+  }, [resultsArray]);
 
   // Give user some visual feedback while we are waiting on our request to return
   if (isLoading && search !== "") {
@@ -51,9 +51,9 @@ export default function Results() {
 
   return (
     <div>
-      <h1>Results</h1>
-      <h2>{result}</h2>
-      <MovieCard />
-    </div>
-  );
+    {resultsArray.map(each =>
+     <MovieCard each= {each} />
+    )}
+  </div>
+  )
 }
