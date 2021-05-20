@@ -1,12 +1,12 @@
-import "./Home.css";
-import PopMovieList from "./ListMovies";
+import "./PopMovies.css";
+import ListMedia from "./ListMedia";
 
-export default function Home(props) {
+export default function PopMovies(props) {
   // console.log(props["match"]["params"]["pageNumber"]);
   return (
     <div>
       <h1>Popular Movies</h1>
-      <PopMovieList
+      <ListMedia
         param={"/movie/popular"}
         page={props["match"]["params"]["pageNumber"]}
       />

@@ -1,6 +1,13 @@
 import React from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import { Home, Results, NotFound } from "./Pages";
+import {
+  PopMovies,
+  PopTVShows,
+  TopRatedMovies,
+  TopRatedTVShows,
+  Results,
+  NotFound,
+} from "./components";
 import {
   Navbar,
   Nav,
@@ -8,7 +15,7 @@ import {
   FormControl,
   Button,
   FormGroup,
-  NavDropdown,
+  // NavDropdown,
 } from "react-bootstrap";
 
 // our export variable that Results will query in our APIs
@@ -84,13 +91,16 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <Navbar id="navbar" bg="dark" variant="dark" expand="md">
+        <Navbar id="navbar" bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">App Name</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav id="nav" className="mr-auto">
-              <Nav.Link href="/movies/">Home</Nav.Link>
-              <NavDropdown title="Categories" id="basic-nav-dropdown">
+              <Nav.Link href="/movie/popular/">Popular Movies</Nav.Link>
+              <Nav.Link href="/tv/popular/">Popular TV Shows</Nav.Link>
+              <Nav.Link href="/movie/top_rated/">Top Rated Movies</Nav.Link>
+              <Nav.Link href="/tv/top_rated/">Top Rated TV Shows</Nav.Link>
+              {/* <NavDropdown title="Categories" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Option 1</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Option 2</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Option 3</NavDropdown.Item>
@@ -98,7 +108,7 @@ class Main extends React.Component {
                 <NavDropdown.Item href="#action/3.4">
                   Something else
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
 
             <Form id="search-form" inline onSubmit={this.afterSubmission}>
@@ -110,7 +120,7 @@ class Main extends React.Component {
                   type="text"
                   placeholder="Search"
                   required
-                  className="mr-sm-2"
+                  className="mr-sm-1"
                 />
               </FormGroup>
               <Button onClick={this.handleSearchSubmit} variant="outline-info">
@@ -120,9 +130,33 @@ class Main extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Redirect exact from="/" to="/movies/" />
-          <Redirect exact path="/movies/" to="/movies/1" />
-          <Route exact path="/movies/:pageNumber" component={Home} />
+          {/* Routing for the Popular Movies page which will take the last arg as an indicator of which page to load from the popular movies list */}
+          <Redirect exact from="/" to="/movie/popular/1" />
+          <Redirect exact path="/movie/popular/" to="/movie/popular/1" />
+          <Route
+            exact
+            path="/movie/popular/:pageNumber"
+            component={PopMovies}
+          />
+          {/* Routing for the Popular TV Shows page which will take the last arg as an indicator of which page to load from the popular tv shows list */}
+          <Redirect exact path="/tv/popular/" to="/tv/popular/1" />
+          <Route exact path="/tv/popular/:pageNumber" component={PopTVShows} />
+
+          {/* Routing for the top rated Movies page which will take the last arg as an indicator of which page to load from the top rated movies list */}
+          <Redirect exact path="/movie/top_rated/" to="/movie/top_rated/1" />
+          <Route
+            exact
+            path="/movie/top_rated/:pageNumber"
+            component={TopRatedMovies}
+          />
+          {/* Routing for the top rated TV Shows page which will take the last arg as an indicator of which page to load from the top rated tv shows list */}
+          <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" />
+          <Route
+            exact
+            path="/tv/top_rated/:pageNumber"
+            component={TopRatedTVShows}
+          />
+
           <Route exact path="/results" component={Results} />
           {/* need to figure out how to expect url query params before adding 404 page */}
           <Route component={NotFound} />
