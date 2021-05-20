@@ -1,7 +1,7 @@
 import { params } from "../App";
 import "./Results.css";
 import { useState, useEffect } from "react";
-import MovieCard from "./movieCard";
+import MovieCard from "../searchComponent/movieCard";
 
 let search = "";
 
