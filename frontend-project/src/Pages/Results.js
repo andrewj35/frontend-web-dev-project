@@ -1,7 +1,6 @@
 import { params } from "../App";
 import "./Results.css";
 import { useState, useEffect } from "react";
-
 let search = "";
 let result;
 
@@ -12,6 +11,8 @@ export default function Results() {
   }
 
   const [isLoading, setLoading] = useState(true);
+  const [resultsArray, setResults] = useState([]);
+
 
   useEffect(() => {
     fetch("https://www.omdbapi.com/?s=" + search + "&apikey=5371282f")
