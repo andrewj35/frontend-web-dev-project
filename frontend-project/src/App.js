@@ -1,10 +1,12 @@
 import React from "react";
+import "./App.css";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import {
   PopMovies,
   PopTVShows,
   TopRatedMovies,
   TopRatedTVShows,
+  Info,
   Results,
   NotFound,
 } from "./Components";
@@ -60,10 +62,15 @@ class Main extends React.Component {
    * We send out an alert when the input is empty to inform user there should be text there.
    */
   handleSearchSubmit = () => {
-    if (this.state.searchText) {
-      params = this.state.searchText;
+    if (document.getElementById("searchBar").value) {
+      params = document.getElementById("searchBar").value;
       this.props.history.replace({
-        pathname: "/results",
+        pathname:
+          "/results/" +
+          encodeURIComponent(document.getElementById("searchBar").value),
+        state: {
+          searchText: document.getElementById("searchBar").value,
+        },
       });
     } else {
       alert("Please enter text in search bar!");
@@ -90,7 +97,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="custom-navbar">
         <Navbar id="navbar" bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">App Name</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -100,30 +107,26 @@ class Main extends React.Component {
               <Nav.Link href="/tv/popular/">Popular TV Shows</Nav.Link>
               <Nav.Link href="/movie/top_rated/">Top Rated Movies</Nav.Link>
               <Nav.Link href="/tv/top_rated/">Top Rated TV Shows</Nav.Link>
-              {/* <NavDropdown title="Categories" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Option 1</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Option 2</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Option 3</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Something else
-                </NavDropdown.Item>
-              </NavDropdown> */}
             </Nav>
 
-            <Form id="search-form" inline onSubmit={this.afterSubmission}>
-              <FormGroup controlId="header-search">
+            <Form
+              // action="/search/"
+              id="search-form"
+              inline
+              onSubmit={this.afterSubmission}
+            >
+              <FormGroup>
+                <Form.Label className="hidden">Search</Form.Label>
                 <FormControl
                   onKeyDown={this.handleKeyPress}
-                  onChange={this.handleSearchInput}
-                  value={this.state.searchText}
                   type="text"
                   placeholder="Search"
                   required
                   className="mr-sm-1"
+                  id="searchBar"
                 />
               </FormGroup>
-              <Button onClick={this.handleSearchSubmit} variant="outline-info">
+              <Button variant="outline-light" onClick={this.handleSearchSubmit}>
                 Search
               </Button>
             </Form>
@@ -141,7 +144,6 @@ class Main extends React.Component {
           {/* Routing for the Popular TV Shows page which will take the last arg as an indicator of which page to load from the popular tv shows list */}
           <Redirect exact path="/tv/popular/" to="/tv/popular/1" />
           <Route exact path="/tv/popular/:pageNumber" component={PopTVShows} />
-
           {/* Routing for the top rated Movies page which will take the last arg as an indicator of which page to load from the top rated movies list */}
           <Redirect exact path="/movie/top_rated/" to="/movie/top_rated/1" />
           <Route
@@ -156,12 +158,14 @@ class Main extends React.Component {
             path="/tv/top_rated/:pageNumber"
             component={TopRatedTVShows}
           />
+          {/* test routing for dashboard part of app */}
+          <Route exact path="/info/:imdbID" component={Info} />
 
-          <Route exact path="/results" component={Results} />
+          <Route exact path="/results/:title" component={Results} />
           {/* need to figure out how to expect url query params before adding 404 page */}
           <Route component={NotFound} />
         </Switch>
-      </>
+      </div>
     );
   }
 }
