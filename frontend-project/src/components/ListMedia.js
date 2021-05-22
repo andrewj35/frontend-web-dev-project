@@ -36,16 +36,21 @@ const ListMedia = (props) => {
 
   // return the container with the Movies and Pagination children components
   return (
-    <div className="container">
-      <PosterGrid media={media} loading={loading} param={props["param"]} />
-      <br />
-      <Pages
-        page={page}
-        loading={loading}
-        total_pages={total_pages}
-        param={props["param"]}
-      />
-    </div>
+    <>
+      <div className="container">
+        <PosterGrid media={media} loading={loading} param={props["param"]} />
+        <br />
+        <div className="pagination justify-content-center">
+          <Pages
+            page={page}
+            loading={loading}
+            total_pages={total_pages}
+            param={props["param"]}
+          />
+        </div>
+        <br />
+      </div>
+    </>
   );
 };
 

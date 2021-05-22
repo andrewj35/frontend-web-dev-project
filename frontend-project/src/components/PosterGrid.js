@@ -1,28 +1,34 @@
+import GetID from "./GetID";
+
 const PosterGrid = ({ media, loading, param }) => {
   if (loading) {
     return <h2>Loading...</h2>;
   } else {
     let items = [];
-    let count = 1;
-    let title = "title";
+    let count = 1; // so we can uniquely identify our key values
 
+    // These will be used to get correct information from the returned object depending on media type (movie vs tv show)
+    let title = "title";
+    let year = "release_date";
+    let type = "/movie/";
     if (param === "/tv/popular" || param === "/tv/top_rated") {
       title = "name";
+      year = "first_air_date";
+      type = "/tv/";
     }
+
     media.forEach((element) => {
+      // console.log(element);
       items.push(
-        <div className="grid-item" id="grid-item" tabIndex={count} key={count}>
-          <figure id={element[title]}>
-            <img
-              className="center"
-              src={
-                `https://image.tmdb.org/t/p/original/` + element["poster_path"]
-              }
-              alt={`poster for ` + element[title]}
-              title={element[title]}
-            ></img>
-            <figcaption>{element[title]}</figcaption>
-          </figure>
+        // <div className="grid-item" id="grid-item" tabIndex={count} key={count}>
+        <div className="grid-item" id="grid-item" key={count}>
+          <GetID
+            type={type}
+            id={element["id"]}
+            element={element}
+            title={title}
+            year={year}
+          />
         </div>
       );
       count++;
