@@ -7,7 +7,7 @@ import {
   TopRatedTVShows,
   Results,
   NotFound,
-} from "./components";
+} from "./Components";
 import {
   Navbar,
   Nav,
