@@ -6,13 +6,12 @@ const GetID = ({ type, id, element, title, year }) => {
 
   let baseURL =
     window.location.protocol + "//" + window.location.host + "/info/";
-
+  if (type === "/tv/") {
+    id = id + "/external_ids";
+  }
   useEffect(() => {
     const fetchMedia = async () => {
       setLoading(true);
-      if (type === "/tv/") {
-        id = id + "/external_ids";
-      }
       const res = await fetch(
         "https://api.themoviedb.org/3" +
           type +

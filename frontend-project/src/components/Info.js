@@ -75,8 +75,10 @@ export default function Info(props) {
     return <></>;
   }
 
-  console.log(media);
+  // console.log(media);
+  // console.log(tmdb);
 
+  // omdb fields
   if (omdb) {
     return (
       <div className="container">
@@ -99,34 +101,52 @@ export default function Info(props) {
         ))}
       </div>
     );
+    // tmdb fields
   } else {
     return (
       <div className="container">
-        <h2>{media["title"]}</h2>
+        <h2>
+          {media["title"]} ({media["release_date"].slice(0, 4)})
+        </h2>
         <img
           src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
           alt={
             `poster for ` +
             media["title"] +
             ` (` +
-            media["release_date"].slice(-4) +
+            media["release_date"].slice(0, 4) +
             `)`
           }
         />
         <p>{media["overview"]}</p>
-        <p>Box Office: {media["revenue"]}</p>
-        <p>Cast: {tmdb["cast"].map((each) => each["name"] + `, `)}</p>
+        {/* <p>Box Office: {media["revenue"]}</p> */}
+        <p>
+          Cast:{" "}
+          {tmdb["cast"].map((each, i) =>
+            i === tmdb["cast"].length - 1 ? each["name"] : each["name"] + `, `
+          )}
+        </p>
+        {media["budget"] ? (
+          <p key={media["budget"]}>Budget: {media["budget"]}</p>
+        ) : (
+          <></>
+        )}
         <p>
           Production Companies:{" "}
-          {media["production_companies"].map((each) => each["name"] + `, `)}
+          {media["production_companies"].map((each, i) =>
+            i === media["production_companies"].length - 1
+              ? each["name"]
+              : each["name"] + `, `
+          )}
         </p>
         {tmdb["crew"].map((each) => (
           <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
         ))}
-        {/* <p>Director: {media["Director"]}</p>
-        <p>Cast: {media["Actors"]}</p>
-        <p>Writers: {media["Writer"]}</p>
-        <p>Runtime: {media["Runtime"]}</p> */}
+        {media["homepage"] ? (
+          <p key={media["homepage"]}>Homepage: {media["homepage"]}</p>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

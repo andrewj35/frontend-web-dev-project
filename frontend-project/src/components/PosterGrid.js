@@ -1,4 +1,4 @@
-import GetID from "./GetID";
+import TMDBCard from "./TMDBCard";
 
 const PosterGrid = ({ media, loading, param }) => {
   if (loading) {
@@ -22,7 +22,7 @@ const PosterGrid = ({ media, loading, param }) => {
       items.push(
         // <div className="grid-item" id="grid-item" tabIndex={count} key={count}>
         <div className="grid-item" id="grid-item" key={count}>
-          <GetID
+          <TMDBCard
             type={type}
             id={element["id"]}
             element={element}
