@@ -18,7 +18,9 @@ const GetID = ({ type, id, element, title, year }) => {
           type +
           id +
           "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
-      ).then((res) => res.json());
+      )
+        .then((res) => res.json())
+        .catch((error) => console.error("fetch error:", error));
       //   console.log(res);
       setURL(res["imdb_id"]);
       setLoading(false);
@@ -29,8 +31,6 @@ const GetID = ({ type, id, element, title, year }) => {
   if (loading) {
     return <></>;
   }
-
-  //   console.log(url);
 
   return (
     <a href={baseURL + url}>
