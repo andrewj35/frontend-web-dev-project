@@ -1,5 +1,6 @@
 import DonutChart from "./DonutChart";
 import { useState, useEffect } from "react";
+import Person from "./PersonLink";
 
 export default function Info(props) {
   const [media, setMedia] = useState([]);
@@ -91,8 +92,12 @@ export default function Info(props) {
         />
         <p>Plot: {media["Plot"]}</p>
         <p>Genre(s): {media["Genre"]}</p>
-        {/* <p>Box Office: {media["BoxOffice"]}</p> This value is outputting zero so we may just omit it*/}
-        <p>Director: {media["Director"]}</p>
+        {media["BoxOffice"] ? (
+          <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
+        ) : (
+          <></>
+        )}{" "}
+        <p>Director(s): {media["Director"]}</p>
         <p>Cast: {media["Actors"]}</p>
         <p>Writers: {media["Writer"]}</p>
         <p>Runtime: {media["Runtime"]}</p>
@@ -123,7 +128,11 @@ export default function Info(props) {
         <p>
           Cast:{" "}
           {tmdb["cast"].map((each, i) =>
-            i === tmdb["cast"].length - 1 ? each["name"] : each["name"] + `, `
+            i === tmdb["cast"].length - 1 ? (
+              <Person key={each["id"]} id={each["id"]}></Person>
+            ) : (
+              each["name"] + `, `
+            )
           )}
         </p>
         {media["budget"] ? (
