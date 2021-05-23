@@ -1,0 +1,15 @@
+
+
+.box1{
+    
+    display: flex;
+    float: left;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 10px;
+    height: 500px;
+    width: 800px;
+    justify-content: space-evenly;
+}
+
+

@@ -1,5 +1,6 @@
 import DonutChart from "./DonutChart";
 import { useState, useEffect } from "react";
+import "./Info.css";
 
 export default function Info(props) {
   const [media, setMedia] = useState([]);
@@ -85,17 +86,19 @@ export default function Info(props) {
         <h2>
           {media["Title"]} ({media["Year"]})
         </h2>
+        <div className="box1">
         <img
           src={media["Poster"]}
           alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
         />
         <p>Plot: {media["Plot"]}</p>
         <p>Genre(s): {media["Genre"]}</p>
+        
         {/* <p>Box Office: {media["BoxOffice"]}</p> This value is outputting zero so we may just omit it*/}
         <p>Director: {media["Director"]}</p>
         <p>Cast: {media["Actors"]}</p>
         <p>Writers: {media["Writer"]}</p>
-        <p>Runtime: {media["Runtime"]}</p>
+        <p>Runtime: {media["Runtime"]}</p></div>
         {ratings.map((each) => (
           <DonutChart rating={each} key={each["Source"]} />
         ))}
@@ -108,6 +111,7 @@ export default function Info(props) {
         <h2>
           {media["title"]} ({media["release_date"].slice(0, 4)})
         </h2>
+        
         <img
           src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
           alt={
@@ -138,7 +142,7 @@ export default function Info(props) {
               ? each["name"]
               : each["name"] + `, `
           )}
-        </p>
+        </p> 
         {tmdb["crew"].map((each) => (
           <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
         ))}
