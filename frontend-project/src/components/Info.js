@@ -7,57 +7,89 @@ export default function Info(props) {
   const [ratings, setRatings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [omdb, setOmdb] = useState(true);
-  const [tmdb, setTmdb] = useState();
+  const [tmdb, setTmdb] = useState([]);
+
+  let [type, setType] = useState(props["match"]["params"]["mediaType"]);
+  // setType(props["match"]["params"]["mediaType"]);
+
+  let [id, setID] = useState(props["match"]["params"]["imdbID"]);
+  // setID(props["match"]["params"]["imdbID"]);
 
   useEffect(() => {
     const fetchMedia = async () => {
       setLoading(true);
       const res = await fetch(
-        "https://www.omdbapi.com/?i=" +
-          props["match"]["params"]["imdbID"] +
-          "&apikey=5371282f"
+        "https://www.omdbapi.com/?i=" + id + "&apikey=5371282f"
       )
         .then((res) => res.json())
         .catch((error) => console.error("fetch error:", error));
 
-      // we failed the first fetch to omdb, now we try TMDB, TV show
-      if (res["Response"] === "False") {
-        const resTV = await fetch(
-          "https://api.themoviedb.org/3/tv/" +
-            props["match"]["params"]["imdbID"] +
-            "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
-        )
-          .then((res) => res.json())
-          .catch((error) => console.error("fetch error:", error));
-        // try TMDB, movie
-        if (resTV.success === false) {
-          const resMovie = await fetch(
-            "https://api.themoviedb.org/3/movie/" +
-              props["match"]["params"]["imdbID"] +
+      if (!res || res["Response"] === "False") {
+        if (type !== "person") {
+          const specificRes = await fetch(
+            "https://api.themoviedb.org/3/" +
+              type +
+              "/" +
+              id +
               "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
           )
             .then((res) => res.json())
             .catch((error) => console.error("fetch error:", error));
+          setMedia(specificRes);
+          // console.log(props["match"]["params"]["mediaType"]);
+
           const resCredits = await fetch(
             "https://api.themoviedb.org/3/movie/" +
-              props["match"]["params"]["imdbID"] +
+              id +
               "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
           )
             .then((res) => res.json())
             .catch((error) => console.error("fetch error:", error));
-          setMedia(resMovie);
           setTmdb(resCredits);
         } else {
-          const resCredits = await fetch(
-            "https://api.themoviedb.org/3/tv/" +
-              props["match"]["params"]["imdbID"] +
-              "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
-          )
-            .then((res) => res.json())
-            .catch((error) => console.error("fetch error:", error));
-          setMedia(resTV);
-          setTmdb(resCredits);
+          console.log("!");
         }
+
+        // setTmdb(specificRes);
+        // // we failed the first fetch to omdb, now we try TMDB, TV show
+        // if (res["Response"] === "False") {
+        // const resTV = await fetch(
+        //   "https://api.themoviedb.org/3/tv/" +
+        //     props["match"]["params"]["imdbID"] +
+        //     "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+        // )
+        //   .then((res) => res.json())
+        //   .catch((error) => console.error("fetch error:", error));
+        // // try TMDB, movie
+        // if (resTV.success === false) {
+        //   const resMovie = await fetch(
+        //     "https://api.themoviedb.org/3/movie/" +
+        //       props["match"]["params"]["imdbID"] +
+        //       "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+        //   )
+        //     .then((res) => res.json())
+        //     .catch((error) => console.error("fetch error:", error));
+        //   const resCredits = await fetch(
+        //     "https://api.themoviedb.org/3/movie/" +
+        //       props["match"]["params"]["imdbID"] +
+        //       "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+        //   )
+        //     .then((res) => res.json())
+        //     .catch((error) => console.error("fetch error:", error));
+        //   setMedia(resMovie);
+        //   setTmdb(resCredits);
+        //   // try TMDB, tv
+        // } else {
+        //   const resCredits = await fetch(
+        //     "https://api.themoviedb.org/3/tv/" +
+        //       props["match"]["params"]["imdbID"] +
+        //       "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+        //   )
+        //     .then((res) => res.json())
+        //     .catch((error) => console.error("fetch error:", error));
+        //   setMedia(resTV);
+        //   setTmdb(resCredits);
+        // }
 
         // flag that we have used TMDB to get the info, not OMDb
         setOmdb(false);
@@ -70,14 +102,14 @@ export default function Info(props) {
       setLoading(false);
     };
     fetchMedia();
-  }, [props]);
+  }, [type, id]);
 
   if (loading) {
     return <></>;
   }
 
   // console.log(media);
-  // console.log(tmdb);
+  console.log(tmdb);
 
   // omdb fields
   if (omdb) {
@@ -101,13 +133,17 @@ export default function Info(props) {
         <p>Cast: {media["Actors"]}</p>
         <p>Writers: {media["Writer"]}</p>
         <p>Runtime: {media["Runtime"]}</p>
-        {ratings.map((each) => (
-          <DonutChart rating={each} key={each["Source"]} />
-        ))}
+        {ratings ? (
+          ratings.map((each) => (
+            <DonutChart rating={each} key={each["Source"]} />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     );
     // tmdb fields
-  } else {
+  } else if (props["match"]["params"]["mediaType"] !== "person") {
     return (
       <div className="container">
         <h2>
@@ -129,9 +165,20 @@ export default function Info(props) {
           Cast:{" "}
           {tmdb["cast"].map((each, i) =>
             i === tmdb["cast"].length - 1 ? (
-              <Person key={each["id"]} id={each["id"]}></Person>
+              <Person
+                key={each["id"]}
+                id={each["id"]}
+                last={true}
+                personName={each["name"]}
+              ></Person>
             ) : (
-              each["name"] + `, `
+              // each["name"] + `, `
+              <Person
+                key={each["id"]}
+                id={each["id"]}
+                last={false}
+                personName={each["name"]}
+              ></Person>
             )
           )}
         </p>
@@ -156,6 +203,12 @@ export default function Info(props) {
         ) : (
           <></>
         )}
+      </div>
+    );
+  } else {
+    return (
+      <div className="container">
+        <p>nice</p>
       </div>
     );
   }
