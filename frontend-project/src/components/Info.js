@@ -36,7 +36,6 @@ export default function Info(props) {
             .then((res) => res.json())
             .catch((error) => console.error("fetch error:", error));
           setMedia(specificRes);
-          // console.log(props["match"]["params"]["mediaType"]);
 
           const resCredits = await fetch(
             "https://api.themoviedb.org/3/movie/" +
@@ -47,7 +46,7 @@ export default function Info(props) {
             .catch((error) => console.error("fetch error:", error));
           setTmdb(resCredits);
         } else {
-          console.log("!");
+          console.log("person");
         }
 
         // setTmdb(specificRes);
@@ -95,7 +94,17 @@ export default function Info(props) {
         setOmdb(false);
       } else {
         setMedia(res);
-        // set page info here
+
+        const resCredits = await fetch(
+          "https://api.themoviedb.org/3/movie/" +
+            id +
+            "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+        )
+          .then((res) => res.json())
+          .catch((error) => console.error("fetch error:", error));
+
+        setTmdb(resCredits);
+
         setRatings(res["Ratings"]);
       }
 
@@ -109,7 +118,7 @@ export default function Info(props) {
   }
 
   // console.log(media);
-  console.log(tmdb);
+  // console.log(tmdb);
 
   // omdb fields
   if (omdb) {
@@ -130,7 +139,31 @@ export default function Info(props) {
           <></>
         )}{" "}
         <p>Director(s): {media["Director"]}</p>
-        <p>Cast: {media["Actors"]}</p>
+        {tmdb ? (
+          <p>
+            Cast:{" "}
+            {tmdb["cast"].map((each, i) =>
+              i === tmdb["cast"].length - 1 ? (
+                <Person
+                  key={each["id"]}
+                  id={each["id"]}
+                  last={true}
+                  personName={each["name"]}
+                ></Person>
+              ) : (
+                // each["name"] + `, `
+                <Person
+                  key={each["id"]}
+                  id={each["id"]}
+                  last={false}
+                  personName={each["name"]}
+                ></Person>
+              )
+            )}
+          </p>
+        ) : (
+          <p>Cast: {media["Actors"]}</p>
+        )}
         <p>Writers: {media["Writer"]}</p>
         <p>Runtime: {media["Runtime"]}</p>
         {ratings ? (
