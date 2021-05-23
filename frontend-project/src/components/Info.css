@@ -1,0 +1,38 @@
+.container { 
+    border: 1px; 
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.box1{
+    
+    display: flex;
+    float: left;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 10px;
+    height: 500px;
+    width: 600px;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    
+}
+
+p{
+    margin: 0px;
+    width: 700px;
+}
+
+.box2{
+    
+    display: flex;
+    margin: 0px;
+    padding-bottom: 20px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+
