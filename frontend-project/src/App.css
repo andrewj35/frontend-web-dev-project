@@ -9,6 +9,17 @@ h1 {
 
 #root {
   background-color: rgb(31, 30, 30);
-  color: aliceblue;
+  color: rgb(240, 248, 255);
+  
+}
+
+* { 
+  border: 1px; 
+}
+
+#navbar{
+  position: sticky;
+  top: 0;
+  background-color: transparent;
   
 }

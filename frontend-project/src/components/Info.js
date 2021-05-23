@@ -99,9 +99,10 @@ export default function Info(props) {
         <p>Cast: {media["Actors"]}</p>
         <p>Writers: {media["Writer"]}</p>
         <p>Runtime: {media["Runtime"]}</p></div>
+        <div className= "box2">
         {ratings.map((each) => (
           <DonutChart rating={each} key={each["Source"]} />
-        ))}
+        ))}</div>
       </div>
     );
     // tmdb fields
