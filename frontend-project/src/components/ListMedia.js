@@ -1,18 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./ListMedia.css";
-import Pages from "./Pages";
 import PosterGrid from "./PosterGrid";
-
-let total_pages;
-let page;
+import Pagination from "react-js-pagination";
 
 const ListMedia = (props) => {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(false);
+  let [page, setPage] = useState();
+  let [total_pages, setTotal_pages] = useState(1);
 
   let param = props["param"];
-  page = props["page"];
 
   useEffect(() => {
     const fetchMedia = async () => {
@@ -26,13 +24,15 @@ const ListMedia = (props) => {
         .then((res) => res.json())
         .catch((error) => console.error("fetch error:", error));
       setMedia(res.results);
-      page = res.page;
-      total_pages = res.total_pages;
+      // total_pages = res.total_pages;
+      setTotal_pages(res.total_pages);
       setLoading(false);
     };
 
     fetchMedia();
-  }, [param]); // there is a dependency on param being initialized - if we could get rid of it it'd be nice
+  }, [param, page]); // there is a dependency on param being initialized - if we could get rid of it it'd be nice
+
+  // console.log(media);
 
   // return the container with the Movies and Pagination children components
   return (
@@ -41,11 +41,15 @@ const ListMedia = (props) => {
         <PosterGrid media={media} loading={loading} param={props["param"]} />
         <br />
         <div className="pagination justify-content-center">
-          <Pages
-            page={page}
-            loading={loading}
-            total_pages={total_pages}
-            param={props["param"]}
+          <Pagination
+            itemClass="page-item"
+            linkClass="page-link"
+            itemsCountPerPage={20}
+            activePage={page}
+            totalItemsCount={total_pages * 20}
+            pageRangeDisplayed={5}
+            onChange={(event) => setPage(event)}
+            hideNavigation={true}
           />
         </div>
         <br />

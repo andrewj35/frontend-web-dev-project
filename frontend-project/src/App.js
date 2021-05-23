@@ -20,9 +20,6 @@ import {
   // NavDropdown,
 } from "react-bootstrap";
 
-// our export variable that Results will query in our APIs
-let params;
-
 // Main class => the navbar + routing
 class Main extends React.Component {
   /**
@@ -63,7 +60,6 @@ class Main extends React.Component {
    */
   handleSearchSubmit = () => {
     if (document.getElementById("searchBar").value) {
-      params = document.getElementById("searchBar").value;
       this.props.history.replace({
         pathname:
           "/results/" +
@@ -134,34 +130,24 @@ class Main extends React.Component {
         </Navbar>
         <Switch>
           {/* Routing for the Popular Movies page which will take the last arg as an indicator of which page to load from the popular movies list */}
-          <Redirect exact from="/" to="/movie/popular/1" />
-          <Redirect exact path="/movie/popular/" to="/movie/popular/1" />
-          <Route
-            exact
-            path="/movie/popular/:pageNumber"
-            component={PopMovies}
-          />
+          <Redirect exact from="/" to="/movie/popular/" />
+          {/* <Redirect exact path="/movie/popular/" to="/movie/popular/1" /> */}
+          <Route exact path="/movie/popular/" component={PopMovies} />
           {/* Routing for the Popular TV Shows page which will take the last arg as an indicator of which page to load from the popular tv shows list */}
-          <Redirect exact path="/tv/popular/" to="/tv/popular/1" />
-          <Route exact path="/tv/popular/:pageNumber" component={PopTVShows} />
+          {/* <Redirect exact path="/tv/popular/" to="/tv/popular/1" /> */}
+          <Route exact path="/tv/popular/" component={PopTVShows} />
           {/* Routing for the top rated Movies page which will take the last arg as an indicator of which page to load from the top rated movies list */}
-          <Redirect exact path="/movie/top_rated/" to="/movie/top_rated/1" />
-          <Route
-            exact
-            path="/movie/top_rated/:pageNumber"
-            component={TopRatedMovies}
-          />
+          {/* <Redirect exact path="/movie/top_rated/" to="/movie/top_rated/1" /> */}
+          <Route exact path="/movie/top_rated/" component={TopRatedMovies} />
           {/* Routing for the top rated TV Shows page which will take the last arg as an indicator of which page to load from the top rated tv shows list */}
-          <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" />
-          <Route
-            exact
-            path="/tv/top_rated/:pageNumber"
-            component={TopRatedTVShows}
-          />
+          {/* <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" /> */}
+          <Route exact path="/tv/top_rated/" component={TopRatedTVShows} />
           {/* test routing for dashboard part of app */}
           <Route exact path="/info/:imdbID" component={Info} />
+          {/* <Route exact path="/info" component={Info} /> */}
 
-          <Route exact path="/results/:title" component={Results} />
+          {/* <Redirect exact path="/results/:title/" to="/results/:title/1" /> */}
+          <Route exact path="/results/:title/" component={Results} />
           {/* need to figure out how to expect url query params before adding 404 page */}
           <Route component={NotFound} />
         </Switch>
@@ -172,4 +158,3 @@ class Main extends React.Component {
 
 export default withRouter(Main);
 // we don't reload our page when the search is submitted, instead we export our params variable with the input text that the results page will handle
-export { params };

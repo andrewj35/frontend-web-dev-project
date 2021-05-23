@@ -9,6 +9,7 @@ npm install react-router-dom --save
 npm install react-bootstrap bootstrap --save 
 npm install --save react-chartjs-2 chart.js
 npm install chart.js --save
+npm install react-js-pagination --save
 
 Main API for querying for movies/TV shows:
 OMDb API
