@@ -1,7 +1,7 @@
 // import { params } from "../App";
 import "./Results.css";
 import { useState, useEffect } from "react";
-import MovieCard from "../searchComponent/movieCard";
+import {CardList} from "../searchComponent/cardList";
 
 export default function Results(props) {
   const [isLoading, setLoading] = useState(true);
@@ -43,11 +43,10 @@ export default function Results(props) {
   } else {
     // resultsArray.map((each) => console.log(each));
     return (
-      <div>
-        {resultsArray.map((each) => (
-          <MovieCard each={each} />
-        ))}
-      </div>
+      <>
+       <CardList results = 
+              {resultsArray} />
+     </>
     );
   }
 }
