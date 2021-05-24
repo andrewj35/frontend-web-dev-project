@@ -51,15 +51,11 @@
 #grid-item:hover,
 #grid-item:focus,
 #grid-item:hover figcaption {
-  background-color: rgb(235, 235, 235);
   color: #0275d8;
 
-  filter: grayscale(50%);
-
-  text-decoration: underline;
   text-decoration-color: #0275d8;
 
-  border-width: 2px;
+  transform: scale(1.03);
 }
 
 div.grid-item figure img {
