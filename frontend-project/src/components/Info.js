@@ -2,6 +2,7 @@ import DonutChart from "./DonutChart";
 import { useState, useEffect } from "react";
 import PersonLink from "./PersonLink";
 import Person from "./PersonInfo";
+import "./Info.css";
 
 /**
  * Maybe be worth it to look into switching our tmdb search calls to
@@ -121,51 +122,58 @@ export default function Info(props) {
         <h2>
           {media["Title"]} ({media["Year"]})
         </h2>
-        <img
-          src={media["Poster"]}
-          alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
-        />
-        <p>Plot: {media["Plot"]}</p>
-        <p>Genre(s): {media["Genre"]}</p>
-        {media["BoxOffice"] ? (
-          <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
-        ) : (
-          <></>
-        )}{" "}
-        <p>Director(s): {media["Director"]}</p>
-        {tmdb.length !== 0 && `cast` in tmdb ? (
-          <p>
-            Cast:{" "}
-            {tmdb["cast"].map((each, i) =>
-              i === tmdb["cast"].length - 1 ? (
-                <PersonLink
-                  key={each["id"]}
-                  id={each["id"]}
-                  last={true}
-                  personName={each["name"]}
-                />
-              ) : (
-                <PersonLink
-                  key={each["id"]}
-                  id={each["id"]}
-                  last={false}
-                  personName={each["name"]}
-                />
-              )
-            )}
-          </p>
-        ) : (
-          <p>Cast: {media["Actors"]}</p>
-        )}
-        <p>Writers: {media["Writer"]}</p>
-        <p>Runtime: {media["Runtime"]}</p>
-        {ratings ? (
-          ratings.map((each) => (
-            <DonutChart rating={each} key={each["Source"]} />
-          ))
-        ) : (
-          <>No ratings available</>
-        )}
+        <div className="box1">
+          <img
+            src={media["Poster"]}
+            alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
+          />
+          <p>Plot: {media["Plot"]}</p>
+          <p>Genre(s): {media["Genre"]}</p>
+
+          {media["BoxOffice"] ? (
+            <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
+          ) : (
+            <p></p>
+          )}
+
+          <p>Director(s): {media["Director"]}</p>
+
+          {tmdb.length !== 0 && `cast` in tmdb ? (
+            <p>
+              Cast:{" "}
+              {tmdb["cast"].map((each, i) =>
+                i === tmdb["cast"].length - 1 ? (
+                  <PersonLink
+                    key={each["id"]}
+                    id={each["id"]}
+                    last={true}
+                    personName={each["name"]}
+                  />
+                ) : (
+                  <PersonLink
+                    key={each["id"]}
+                    id={each["id"]}
+                    last={false}
+                    personName={each["name"]}
+                  />
+                )
+              )}
+            </p>
+          ) : (
+            <p>Cast: {media["Actors"]}</p>
+          )}
+          <p>Writers: {media["Writer"]}</p>
+          <p>Runtime: {media["Runtime"]}</p>
+        </div>
+        <div className="box2">
+          {ratings ? (
+            ratings.map((each) => (
+              <DonutChart rating={each} key={each["Source"]} />
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     );
     // tmdb only and a person wasn't selected
@@ -179,75 +187,92 @@ export default function Info(props) {
         ) : (
           <h2>{media["title"]} </h2>
         )}
-        {`release_date` in media ? (
-          <img
-            src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
-            alt={
-              `poster for ` +
-              media["title"] +
-              ` (` +
-              media["release_date"].slice(0, 4) +
-              `)`
-            }
-          />
-        ) : (
-          <img
-            src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
-            alt={`poster for ` + media["title"]}
-          />
-        )}
-
-        <p>{media["overview"]}</p>
-        {/* <p>Box Office: {media["revenue"]}</p> */}
-        <p>
-          Cast:{" "}
-          {tmdb["cast"].map((each, i) =>
-            i === tmdb["cast"].length - 1 ? (
-              <PersonLink
-                key={each["id"]}
-                id={each["id"]}
-                last={true}
-                personName={each["name"]}
-              />
-            ) : (
-              // each["name"] + `, `
-              <PersonLink
-                key={each["id"]}
-                id={each["id"]}
-                last={false}
-                personName={each["name"]}
-              />
-            )
+        <div className="TMDB-box">
+          {`release_date` in media ? (
+            <img
+              height="350px"
+              width="350px"
+              src={
+                `https://image.tmdb.org/t/p/original/` + media["poster_path"]
+              }
+              alt={
+                `poster for ` +
+                media["title"] +
+                ` (` +
+                media["release_date"].slice(0, 4) +
+                `)`
+              }
+            />
+          ) : (
+            <img
+              src={
+                `https://image.tmdb.org/t/p/original/` + media["poster_path"]
+              }
+              alt={`poster for ` + media["title"]}
+            />
           )}
-        </p>
-        {media["budget"] ? (
-          <p key={media["budget"]}>Budget: {media["budget"]}</p>
-        ) : (
-          <></>
-        )}
-        {`production_companies` in media ? (
+
           <p>
-            Production Companies:{" "}
-            {media["production_companies"].map((each, i) =>
-              i === media["production_companies"].length - 1
-                ? each["name"]
-                : each["name"] + `, `
+            <br></br>
+            <b>Overview: </b>
+            <br></br> {media["overview"]}
+          </p>
+        </div>
+
+        {/* <p>Box Office: {media["revenue"]}</p> */}
+        <div className="TMDB-box2">
+          <p>
+            <br></br>
+            Cast: <br></br>
+            {tmdb["cast"].map((each, i) =>
+              i === tmdb["cast"].length - 1 ? (
+                <PersonLink
+                  key={each["id"]}
+                  id={each["id"]}
+                  last={true}
+                  personName={each["name"]}
+                />
+              ) : (
+                // each["name"] + `, `
+                <PersonLink
+                  key={each["id"]}
+                  id={each["id"]}
+                  last={false}
+                  personName={each["name"]}
+                />
+              )
             )}
           </p>
-        ) : (
-          <></>
-        )}
+          {media["budget"] ? (
+            <p key={media["budget"]}>Budget: {media["budget"]}</p>
+          ) : (
+            <p></p>
+          )}
+          {`production_companies` in media ? (
+            <p>
+              Production Companies: <br></br>
+              {media["production_companies"].map((each, i) =>
+                i === media["production_companies"].length - 1
+                  ? each["name"]
+                  : each["name"] + `, `
+              )}
+            </p>
+          ) : (
+            <p></p>
+          )}
 
-        {tmdb["crew"].map((each) => (
-          <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
-        ))}
-        {media["homepage"] ? (
-          <a href={media["homepage"]} key={media["homepage"]}>
-            Homepage
-          </a>
-        ) : (
-          <></>
-        )}
+          {tmdb["crew"].map((each) => (
+            <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
+          ))}
+
+          {media["homepage"] ? (
+            <a href={media["homepage"]} key={media["homepage"]}>
+              Homepage
+            </a>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     );
     // output person

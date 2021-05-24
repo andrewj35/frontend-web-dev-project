@@ -1,32 +1,18 @@
-
-.cardList { 
-    display: flex;
-    flex-direction: column;
-    flex-wrap:no-wrap;
-    justify-content: center;
-    text-align: center;
-    
-}
-/* .cardList:hover {
-    transform: scale(1.05);
-    background-color: rgb(14, 13, 13);
-    
-} */
-
 .card-container {
-    background-color: #f1f1f1;
-    margin: 10px;
-    padding: 20px;
-    font-size: 30px;
-    
-   
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(217, 219, 250);
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-size: 19px;
+  cursor: pointer;
+  width: 105%;
+  font-family: "Tenali Ramakrishna", sans-serif;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
 }
 
-/* .card-container:hover {
-    transform: scale(1.05);
-    background-color: rgb(14, 13, 13);
+.card-container:hover {
+  transform: scale(1.05);
 }
-
-.image {
-    height: 70%;
-} */

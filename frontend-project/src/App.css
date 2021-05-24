@@ -6,3 +6,49 @@ h1 {
 .hidden {
   visibility: hidden;
 }
+
+#root {
+  background-color: rgb(31, 30, 30);
+  color: rgb(240, 248, 255);
+}
+
+* {
+  border: 1px;
+}
+
+#navbar {
+  position: sticky;
+  top: 0;
+  background-color: transparent;
+  height: 50px;
+
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.nav-link:hover {
+  background-color: rgb(6, 7, 7);
+  padding: 15px;
+
+  size: 15px;
+  transform: scale(1);
+}
+.navbar-brand:hover {
+  background-color: rgb(6, 7, 7);
+  padding: 10px;
+  size: 35px;
+  transform: scale(1);
+}
+.nav-link {
+  display: block;
+  text-align: left;
+  padding: 5px;
+  border-right: 5px;
+  text-decoration: none;
+}
+.navbar-brand {
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  padding: 0 5 0 0;
+}
