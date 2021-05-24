@@ -1,12 +1,28 @@
 import DonutChart from "./DonutChart";
 import { useState, useEffect } from "react";
 import PersonLink from "./PersonLink";
+import Person from "./PersonInfo";
+
+/**
+ * Maybe be worth it to look into switching our tmdb search calls to
+ * https://developers.themoviedb.org/3/find/find-by-id
+ *
+ * Edge case movies to test:
+ * Mortal Kombal (omdb + tmdb)
+ * 22 vs earth (only in tmdb, not omdb)
+ * No-Input Pixels (no imdb id, no cast, only director)
+ */
 
 export default function Info(props) {
+  // Array of objects for our output
   const [media, setMedia] = useState([]);
+  // Array of ratings, if omdb call was successful, to output
   const [ratings, setRatings] = useState();
+  // If all the API fetch calls have been completed
   const [loading, setLoading] = useState(false);
+  // Flag if omdb call was successful
   const [omdb, setOmdb] = useState(true);
+  // Array of objects, if omdb call wasn't successful, to output
   const [tmdb, setTmdb] = useState([]);
 
   let [type] = useState(props["match"]["params"]["mediaType"]);
@@ -20,11 +36,13 @@ export default function Info(props) {
         "https://www.omdbapi.com/?i=" + id + "&apikey=5371282f"
       )
         .then((res) => res.json())
-        .catch((error) => console.error("fetch error:", error));
+        .catch((error) => setOmdb(false));
 
-      if (!res || res["Response"] === "False") {
-        if (type !== "person") {
-          const specificRes = await fetch(
+      // If omdb doesn't have the media, thus we need to get the information from tmdb
+      if (res.length === 0 || res["Response"] === "False") {
+        let specificRes = [];
+        if (type !== "person" && type !== "null" && id !== "null") {
+          specificRes = await fetch(
             "https://api.themoviedb.org/3/" +
               type +
               "/" +
@@ -33,10 +51,20 @@ export default function Info(props) {
           )
             .then((res) => res.json())
             .catch((error) => console.error("fetch error:", error));
-          setMedia(specificRes);
-        } else {
-          console.log("person");
         }
+        if (specificRes.length === 0 || specificRes["success"] === false) {
+          specificRes = await fetch(
+            "https://api.themoviedb.org/3/" +
+              type +
+              "/" +
+              tmdbID +
+              "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+          )
+            .then((res) => res.json())
+            .catch((error) => console.error("fetch error:", error));
+        }
+
+        setMedia(specificRes);
 
         setOmdb(false); // we couldn't use omdb
       } else {
@@ -45,17 +73,20 @@ export default function Info(props) {
         setRatings(res["Ratings"]);
       }
 
-      let resCredits = await fetch(
-        "https://api.themoviedb.org/3/" +
-          type +
-          "/" +
-          id +
-          "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
-      )
-        .then((res) => res.json())
-        .catch((error) => console.error("fetch error:", error));
+      // Always grab the list of credits - tmdb contains the most and we can link to profiles
+      let resCredits = [];
+      if (id !== "null")
+        resCredits = await fetch(
+          "https://api.themoviedb.org/3/" +
+            type +
+            "/" +
+            id +
+            "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+        )
+          .then((res) => res.json())
+          .catch((error) => console.error("fetch error:", error));
 
-      if (resCredits["success"] === false && tmdbID) {
+      if (resCredits.length === 0 && tmdbID) {
         resCredits = await fetch(
           "https://api.themoviedb.org/3/" +
             type +
@@ -78,7 +109,7 @@ export default function Info(props) {
   }
 
   // console.log(media);
-  console.log(tmdb);
+  // console.log(tmdb);
 
   if (omdb && media && tmdb !== []) {
     return (
@@ -133,22 +164,35 @@ export default function Info(props) {
         )}
       </div>
     );
-  } else if (props["match"]["params"]["mediaType"] !== "person") {
+    // tmdb only and a person wasn't selected
+  } else if (type !== "person") {
     return (
       <div className="container">
-        <h2>
-          {media["title"]} ({media["release_date"].slice(0, 4)})
-        </h2>
-        <img
-          src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
-          alt={
-            `poster for ` +
-            media["title"] +
-            ` (` +
-            media["release_date"].slice(0, 4) +
-            `)`
-          }
-        />
+        {`title` in media && `release_date` in media ? (
+          <h2>
+            {media["title"]} ({media["release_date"].slice(0, 4)})
+          </h2>
+        ) : (
+          <h2>{media["title"]} </h2>
+        )}
+        {`release_date` in media ? (
+          <img
+            src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
+            alt={
+              `poster for ` +
+              media["title"] +
+              ` (` +
+              media["release_date"].slice(0, 4) +
+              `)`
+            }
+          />
+        ) : (
+          <img
+            src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
+            alt={`poster for ` + media["title"]}
+          />
+        )}
+
         <p>{media["overview"]}</p>
         {/* <p>Box Office: {media["revenue"]}</p> */}
         <p>
@@ -177,28 +221,36 @@ export default function Info(props) {
         ) : (
           <></>
         )}
-        <p>
-          Production Companies:{" "}
-          {media["production_companies"].map((each, i) =>
-            i === media["production_companies"].length - 1
-              ? each["name"]
-              : each["name"] + `, `
-          )}
-        </p>
+        {`production_companies` in media ? (
+          <p>
+            Production Companies:{" "}
+            {media["production_companies"].map((each, i) =>
+              i === media["production_companies"].length - 1
+                ? each["name"]
+                : each["name"] + `, `
+            )}
+          </p>
+        ) : (
+          <></>
+        )}
+
         {tmdb["crew"].map((each) => (
           <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
         ))}
         {media["homepage"] ? (
-          <p key={media["homepage"]}>Homepage: {media["homepage"]}</p>
+          <a href={media["homepage"]} key={media["homepage"]}>
+            Homepage
+          </a>
         ) : (
           <></>
         )}
       </div>
     );
+    // output person
   } else {
     return (
       <div className="container">
-        <p>nice</p>
+        <Person id={tmdbID} />
       </div>
     );
   }

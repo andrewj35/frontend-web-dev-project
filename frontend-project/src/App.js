@@ -143,12 +143,15 @@ class Main extends React.Component {
           {/* <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" /> */}
           <Route exact path="/tv/top_rated/" component={TopRatedTVShows} />
           {/* test routing for dashboard part of app */}
-          <Route exact path="/info/:imdbID" component={Info} />
+          <Route
+            exact
+            path="/info/:imdbID/:mediaType/:tmdbID?"
+            component={Info}
+          />
           {/* <Route exact path="/info" component={Info} /> */}
-
           {/* <Redirect exact path="/results/:title/" to="/results/:title/1" /> */}
           <Route exact path="/results/:title/" component={Results} />
-          {/* need to figure out how to expect url query params before adding 404 page */}
+
           <Route component={NotFound} />
         </Switch>
       </div>
