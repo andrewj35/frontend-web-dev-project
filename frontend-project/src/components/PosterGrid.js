@@ -8,24 +8,31 @@ const PosterGrid = ({ media, loading, param }) => {
     let count = 1; // so we can uniquely identify our key values
 
     // These will be used to get correct information from the returned object depending on media type (movie vs tv show)
-
+    // console.log(media);
     media.forEach((element) => {
       let title = "title";
       let year = "release_date";
       let type = "/movie/";
+      // console.log(param);
       if (param === "/tv/popular" || param === "/tv/top_rated") {
         title = "name";
         year = "first_air_date";
         type = "/tv/";
-      } else if (param === "either") {
+      } else if (param !== "/movie/popular" && param !== "/movie/top_rated") {
         if (element["media_type"] === "tv") {
           title = "name";
           year = "first_air_date";
           type = "/tv/";
-        } else {
+        } else if (element["media_type"] === "movie") {
+          // movie
           title = "title";
           year = "release_date";
           type = "/movie/";
+        } else {
+          // person
+          title = "name";
+          year = "release_date";
+          type = "/person/";
         }
       }
       // console.log(element);

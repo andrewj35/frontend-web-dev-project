@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const PersonLink = ({ id, last, personName }) => {
   let [person, setPerson] = useState();
-  let [credits, setCredits] = useState();
+  // let [credits, setCredits] = useState();
   const [loading, setLoading] = useState(false);
 
   let baseURL =
@@ -19,21 +19,14 @@ const PersonLink = ({ id, last, personName }) => {
         .then((res) => res.json())
         .catch((error) => console.error("fetch error:", error));
 
-      const getCredits = await fetch(
-        "https://api.themoviedb.org/3/person/" +
-          id +
-          "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
-      )
-        .then((res) => res.json())
-        .catch((error) => console.error("fetch error:", error));
       setPerson(getDetails);
-      setCredits(getCredits);
+      // setCredits(getCredits);
       setLoading(false);
     };
     fetchInfo();
   }, [id]);
 
-  // console.log(personName);
+  // console.log(typeof personName);
   // console.log(credits);
 
   if (loading) {
@@ -46,12 +39,12 @@ const PersonLink = ({ id, last, personName }) => {
       name = name + ",";
     }
     return (
-      <>
-        <a href={baseURL + person["id"]}>{name}</a>{" "}
-      </>
+      <a href={baseURL + person["id"]} key={id}>
+        {name}{" "}
+      </a>
     );
   } else {
-    return <text>EMPTY</text>;
+    return personName;
   }
 };
 

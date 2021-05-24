@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 
-const GetID = ({ type, id, element, title, year }) => {
+const TMDBCard = ({ type, id, element, title, year }) => {
   const [url, setURL] = useState();
   const [loading, setLoading] = useState(false);
 
   let baseURL =
     window.location.protocol + "//" + window.location.host + "/info/";
+
   if (type === "/tv/") {
     id = id + "/external_ids";
   }
+
+  // console.log(type);
   useEffect(() => {
     const fetchMedia = async () => {
       setLoading(true);
@@ -20,8 +23,8 @@ const GetID = ({ type, id, element, title, year }) => {
       )
         .then((res) => res.json())
         .catch((error) => console.error("fetch error:", error));
-      //   console.log(res);
-      setURL(res["imdb_id"]);
+      // console.log(res);
+      setURL(res["imdb_id"] + type + res["id"]);
       setLoading(false);
     };
     fetchMedia();
@@ -92,4 +95,4 @@ const GetID = ({ type, id, element, title, year }) => {
   );
 };
 
-export default GetID;
+export default TMDBCard;
