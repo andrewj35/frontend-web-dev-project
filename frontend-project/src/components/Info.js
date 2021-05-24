@@ -87,9 +87,10 @@ export default function Info(props) {
           {media["Title"]} ({media["Year"]})
         </h2>
         <div className="box1">
-        <img
+        <img 
           src={media["Poster"]}
           alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
+          
         />
         <p>Plot: {media["Plot"]}</p>
         <p>Genre(s): {media["Genre"]}</p>
@@ -112,8 +113,8 @@ export default function Info(props) {
         <h2>
           {media["title"]} ({media["release_date"].slice(0, 4)})
         </h2>
-        
-        <img
+        <div className="TMDB-box">
+        <img height="350px" width="350px"
           src={`https://image.tmdb.org/t/p/original/` + media["poster_path"]}
           alt={
             `poster for ` +
@@ -123,10 +124,11 @@ export default function Info(props) {
             `)`
           }
         />
-        <p>{media["overview"]}</p>
+        <p><br></br><b>Overview: </b><br></br> {media["overview"]}</p></div>
         {/* <p>Box Office: {media["revenue"]}</p> */}
-        <p>
-          Cast:{" "}
+        <div className="TMDB-box2">
+        <p><br></br>
+          Cast:{" "}<br></br>
           {tmdb["cast"].map((each, i) =>
             i === tmdb["cast"].length - 1 ? each["name"] : each["name"] + `, `
           )}
@@ -137,7 +139,7 @@ export default function Info(props) {
           <></>
         )}
         <p>
-          Production Companies:{" "}
+          Production Companies:{" "}<br></br>
           {media["production_companies"].map((each, i) =>
             i === media["production_companies"].length - 1
               ? each["name"]
@@ -152,7 +154,7 @@ export default function Info(props) {
         ) : (
           <></>
         )}
-      </div>
+      </div></div>
     );
   }
 }

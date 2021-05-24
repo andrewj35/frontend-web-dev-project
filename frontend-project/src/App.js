@@ -9,7 +9,7 @@ import {
   Info,
   Results,
   NotFound,
-} from "./Components";
+} from "./components";
 import {
   Navbar,
   Nav,
