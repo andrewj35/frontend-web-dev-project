@@ -39,7 +39,11 @@ export default function Info(props) {
         .catch((error) => setOmdb(false));
 
       // If omdb doesn't have the media, thus we need to get the information from tmdb
-      if (res.length === 0 || res["Response"] === "False") {
+      if (
+        res === undefined ||
+        res.length === 0 ||
+        res["Response"] === "False"
+      ) {
         let specificRes = [];
         if (type !== "person" && type !== "null" && id !== "null") {
           specificRes = await fetch(

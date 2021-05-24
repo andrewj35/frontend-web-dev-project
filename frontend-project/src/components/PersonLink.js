@@ -6,7 +6,7 @@ const PersonLink = ({ id, last, personName }) => {
   const [loading, setLoading] = useState(false);
 
   let baseURL =
-    window.location.protocol + "//" + window.location.host + "/person/";
+    window.location.protocol + "//" + window.location.host + "/info/";
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -39,7 +39,10 @@ const PersonLink = ({ id, last, personName }) => {
       name = name + ",";
     }
     return (
-      <a href={baseURL + person["id"]} key={id}>
+      <a
+        href={baseURL + person["tmdb_id"] + "/person/" + person["id"]}
+        key={id}
+      >
         {name}{" "}
       </a>
     );
