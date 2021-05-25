@@ -8,6 +8,7 @@ By Naved khan
   background: #fff;
   font-family: "Arvo", serif;
   text-align: center;
+  color: black;
 }
 
 .page_404 img {
@@ -35,6 +36,11 @@ By Naved khan
   margin: 20px 0;
   display: inline-block;
 }
+
 .contant_box_404 {
   margin-top: -50px;
+}
+
+.subtext {
+  font-size: 18px;
 }
