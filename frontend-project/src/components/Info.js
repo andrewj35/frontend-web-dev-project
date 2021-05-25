@@ -42,7 +42,7 @@ export default function Info(props) {
         "https://www.omdbapi.com/?i=" + id + "&apikey=5371282f"
       )
         .then((res) => res.json())
-        .catch((error) => setOmdb(false));
+        .catch(() => setOmdb(false));
 
       // If omdb doesn't have the media, thus we need to get the information from tmdb
       if (
@@ -118,10 +118,8 @@ export default function Info(props) {
     return <></>;
   }
 
-  // console.log(media);
-  // console.log(tmdb);
-
   if (omdb && media && tmdb !== []) {
+    // console.log(media);
     return (
       <div className="container">
         <h2>

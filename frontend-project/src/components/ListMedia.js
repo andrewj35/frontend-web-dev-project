@@ -7,7 +7,7 @@ import Pagination from "react-js-pagination";
 const ListMedia = (props) => {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(false);
-  let [page, setPage] = useState();
+  let [page, setPage] = useState(parseInt(props["page"]));
   let [total_pages, setTotal_pages] = useState(1);
 
   let param = props["param"];
@@ -34,6 +34,20 @@ const ListMedia = (props) => {
 
   // console.log(media);
 
+  function changePage(event) {
+    window.history.pushState(
+      {},
+      "",
+      window.location.protocol +
+        "//" +
+        window.location.host +
+        param +
+        "/" +
+        event
+    );
+    setPage(event);
+  }
+
   // return the container with the Movies and Pagination children components
   return (
     <>
@@ -48,7 +62,7 @@ const ListMedia = (props) => {
             activePage={page}
             totalItemsCount={total_pages * 20}
             pageRangeDisplayed={5}
-            onChange={(event) => setPage(event)}
+            onChange={(event) => changePage(event)}
             hideNavigation={true}
           />
         </div>

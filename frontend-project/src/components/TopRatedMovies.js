@@ -1,4 +1,3 @@
-import "./PopMovies.css";
 import ListMedia from "./ListMedia";
 
 export default function TopRatedMovies(props) {
@@ -8,7 +7,7 @@ export default function TopRatedMovies(props) {
       <h1>Top Rated Movies</h1>
       <ListMedia
         param={"/movie/top_rated"}
-        page={props["match"]["params"]["pageNumber"]}
+        page={props["match"]["params"]["page"]}
       />
     </div>
   );

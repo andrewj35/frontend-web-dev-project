@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const PersonInfo = ({ tmdbID }) => {
   const [loading, setLoading] = useState(true);
   const [person, setPerson] = useState([]);
-  // const [credits, setCredits] = useState([]);
+  const [credits, setCredits] = useState([]);
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -15,6 +15,15 @@ const PersonInfo = ({ tmdbID }) => {
       )
         .then((res) => res.json())
         .then((res) => setPerson(res))
+        .catch((error) => console.error(error));
+
+      await fetch(
+        "https://api.themoviedb.org/3/person/" +
+          tmdbID +
+          "/combined_credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+      )
+        .then((res) => res.json())
+        .then((res) => setCredits(res))
         .then(setLoading(false))
         .catch((error) => console.error(error));
     };
@@ -24,7 +33,7 @@ const PersonInfo = ({ tmdbID }) => {
   if (loading) {
     return <></>;
   } else {
-    console.log(person);
+    console.log(credits);
     let image = "https://image.tmdb.org/t/p/original/";
     if (person) {
       if (person["profile_path"]) {
@@ -37,6 +46,46 @@ const PersonInfo = ({ tmdbID }) => {
       image =
         "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
     }
+
+    let acting = [];
+    // let other = []; // for listing crew credits (producing, directing, etc)
+    // need to link all of these movies/credits => get the credit_id? and media_type => get the id? => get the tmdb_id? => rdy to link?
+    if (credits !== []) {
+      if (`cast` in credits) {
+        credits.cast.forEach((element, i) => {
+          acting.push(
+            <div key={i}>
+              {`name` in element ? (
+                <h1>{element["name"]}</h1>
+              ) : `title` in element ? (
+                <h1>{element["title"]}</h1>
+              ) : (
+                <></>
+              )}
+              {`poster_path` in element ? (
+                element["poster_path"] ? (
+                  <img
+                    width="225px"
+                    height="300px"
+                    src={
+                      "https://image.tmdb.org/t/p/original/" +
+                      element["poster_path"]
+                    }
+                    alt={`poster for ` + element["name"]}
+                  />
+                ) : (
+                  <></>
+                )
+              ) : (
+                <></>
+              )}{" "}
+              {`character` in element ? <p>{element["character"]}</p> : <></>}
+            </div>
+          );
+        });
+      }
+    }
+
     return (
       <div>
         {`profile_path` in person ? (
@@ -83,6 +132,7 @@ const PersonInfo = ({ tmdbID }) => {
         ) : (
           <></>
         )}
+        {acting !== [] ? <div>Acting credits: {acting}</div> : <></>}
       </div>
     );
   }
@@ -101,8 +151,10 @@ export default PersonInfo;
  * and
  * https://api.themoviedb.org/3/person/287/tv_credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
  *
+ * Maybe use something like https://jsfiddle.net/davidliang2008/cu0p613v/ to collapse/expand list of credits?
+ *
  * then to get more info about a credit:
- * https://api.themoviedb.org/3/credit/52570765760ee3776a03124d?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
+ * https://api.themoviedb.org/3/credit/5d294e6ba294f00c1729118d?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
  *
  *
  */

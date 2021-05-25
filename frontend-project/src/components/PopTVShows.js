@@ -1,4 +1,3 @@
-import "./PopMovies.css";
 import ListMedia from "./ListMedia";
 
 export default function PopTVShows(props) {
@@ -8,7 +7,7 @@ export default function PopTVShows(props) {
       <h1>Popular TV Shows</h1>
       <ListMedia
         param={"/tv/popular"}
-        page={props["match"]["params"]["pageNumber"]}
+        page={props["match"]["params"]["page"]}
       />
     </div>
   );
