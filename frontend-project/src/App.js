@@ -112,7 +112,7 @@ class Main extends React.Component {
               onSubmit={this.afterSubmission}
             >
               <FormGroup>
-                <Form.Label className="hidden" for="searchBar">
+                <Form.Label className="hidden" htmlFor="searchBar">
                   Search
                 </Form.Label>
                 <FormControl
