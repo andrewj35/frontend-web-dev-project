@@ -12,6 +12,11 @@ import "./Info.css";
  * Mortal Kombal (omdb + tmdb)
  * 22 vs earth (only in tmdb, not omdb)
  * No-Input Pixels (no imdb id, no cast, only director)
+ *
+ * Things we can still output:
+ * - providers (tmdb)
+ * - display person page (output information - tmdb)
+ * -
  */
 
 export default function Info(props) {
@@ -279,7 +284,7 @@ export default function Info(props) {
   } else {
     return (
       <div className="container">
-        <Person id={tmdbID} />
+        <Person tmdbID={tmdbID} />
       </div>
     );
   }
