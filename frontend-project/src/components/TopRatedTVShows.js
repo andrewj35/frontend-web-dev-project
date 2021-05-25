@@ -1,6 +1,7 @@
 import "./PopMovies.css";
 import ListMedia from "./ListMedia";
 
+
 export default function TopRatedTVShows(props) {
   // console.log(props["match"]["params"]["pageNumber"]);
   return (
