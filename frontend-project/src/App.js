@@ -105,12 +105,7 @@ class Main extends React.Component {
               <Nav.Link href="/tv/top_rated/">Top Rated TV Shows</Nav.Link>
             </Nav>
 
-            <Form
-              // action="/search/"
-              id="search-form"
-              inline
-              onSubmit={this.afterSubmission}
-            >
+            <Form id="search-form" inline onSubmit={this.afterSubmission}>
               <FormGroup>
                 <Form.Label className="hidden" htmlFor="searchBar">
                   Search
