@@ -28,7 +28,7 @@ const TMDBCard = ({ type, id, element, title, year }) => {
       // console.log(res);
       setURL(res["imdb_id"] + type + res["id"]);
 
-      // begin logic for making a call to omdb if there is no poster from tmdb
+      // making a call to omdb if there is no poster from tmdb
       if (type === "/tv/" || type === "/movie/") {
         if (!element["poster_path"]) {
           // console.log(element);
@@ -70,18 +70,18 @@ const TMDBCard = ({ type, id, element, title, year }) => {
   }
 
   let image = "https://image.tmdb.org/t/p/original/";
-  if (element["media_type"] === "person" && element["profile_path"]) {
+  if (!element["poster_path"] && omdb && !element["backdrop_path"]) {
+    image = secondaryUrl;
+  } else if (element["media_type"] === "person" && element["profile_path"]) {
     image = image + element["profile_path"];
-  } else if (!element["poster_path"]) {
-    // no image available from wiki
+  } else if (element["poster_path"]) {
+    image = image + element["poster_path"];
+  } else if (element["backdrop_path"]) {
+    image = image + element["backdrop_path"];
+  } else {
+    // no image available - from wiki
     image =
       "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
-  } else {
-    image = image + element["poster_path"];
-  }
-
-  if (!element["poster_path"] && omdb) {
-    image = secondaryUrl;
   }
 
   return (

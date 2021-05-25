@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import TMDBCard from "./TMDBCard";
 
 const PersonInfo = ({ tmdbID }) => {
   const [loading, setLoading] = useState(true);
@@ -53,36 +54,68 @@ const PersonInfo = ({ tmdbID }) => {
     if (credits !== []) {
       if (`cast` in credits) {
         credits.cast.forEach((element, i) => {
+          console.log(`/` + element["media_type"] + `/`);
+          let title = "title";
+          let year = "release_date";
+          let type = "/movie/";
+          if (element["media_type"] === "tv") {
+            title = "name";
+            year = "first_air_date";
+            type = "/tv/";
+          }
           acting.push(
-            <div key={i}>
-              {`name` in element ? (
-                <h1>{element["name"]}</h1>
-              ) : `title` in element ? (
-                <h1>{element["title"]}</h1>
-              ) : (
-                <></>
-              )}
-              {`poster_path` in element ? (
-                element["poster_path"] ? (
-                  <img
-                    width="225px"
-                    height="300px"
-                    src={
-                      "https://image.tmdb.org/t/p/original/" +
-                      element["poster_path"]
-                    }
-                    alt={`poster for ` + element["name"]}
-                  />
+            <div className="grid-item" id="grid-item" key={i}>
+              <TMDBCard
+                type={type}
+                id={element["id"]}
+                element={element}
+                title={title}
+                year={year}
+              />
+              {`character` in element ? (
+                element["character"] ? (
+                  <p>as {element["character"]}</p>
                 ) : (
                   <></>
                 )
               ) : (
                 <></>
-              )}{" "}
-              {`character` in element ? <p>{element["character"]}</p> : <></>}
+              )}
+              {/* <p>{element["title"]}</p> */}
             </div>
           );
         });
+        // credits.cast.forEach((element, i) => {
+        //   acting.push(
+        //     <div key={i}>
+        //       {`name` in element ? (
+        //         <h1>{element["name"]}</h1>
+        //       ) : `title` in element ? (
+        //         <h1>{element["title"]}</h1>
+        //       ) : (
+        //         <></>
+        //       )}
+        //       {`poster_path` in element ? (
+        //         element["poster_path"] ? (
+        //           <img
+        //             width="225px"
+        //             height="300px"
+        //             src={
+        //               "https://image.tmdb.org/t/p/original/" +
+        //               element["poster_path"]
+        //             }
+        //             alt={`poster for ` + element["name"]}
+        //           />
+        //         ) : (
+        //           <></>
+        //         )
+        //       ) : (
+        //         <></>
+        //       )}{" "}
+        //       {`character` in element ? <p>{element["character"]}</p> : <></>}
+        //     </div>
+        //   );
+        // });
       }
     }
 
@@ -108,7 +141,15 @@ const PersonInfo = ({ tmdbID }) => {
         ) : (
           <></>
         )}
-        {`biography` in person ? <p>About: {person["biography"]}</p> : <></>}
+        {`biography` in person ? (
+          person["biography"] ? (
+            <p>About: {person["biography"]}</p>
+          ) : (
+            <></>
+          )
+        ) : (
+          <></>
+        )}
         {`homepage` in person ? (
           person["homepage"] ? (
             <a href={person["homepage"]}>Homepage</a>
@@ -119,7 +160,11 @@ const PersonInfo = ({ tmdbID }) => {
           <></>
         )}
         {`place_of_birth` in person ? (
-          <p>Place of birth: {person["place_of_birth"]}</p>
+          person["place_of_birth"] ? (
+            <p>Place of birth: {person["place_of_birth"]}</p>
+          ) : (
+            <p>Place of birth: Unknown</p>
+          )
         ) : (
           <></>
         )}
@@ -132,7 +177,13 @@ const PersonInfo = ({ tmdbID }) => {
         ) : (
           <></>
         )}
-        {acting !== [] ? <div>Acting credits: {acting}</div> : <></>}
+        {acting !== [] ? (
+          <div>
+            <h2>Acting credits:</h2> {acting}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
