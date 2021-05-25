@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 const TMDBCard = ({ type, id, element, title, year }) => {
   const [url, setURL] = useState();
   const [loading, setLoading] = useState(false);
+  const [omdb, setOmdb] = useState(false);
+  const [secondaryUrl, setURL2] = useState();
 
   let baseURL =
     window.location.protocol + "//" + window.location.host + "/info/";
@@ -11,7 +13,7 @@ const TMDBCard = ({ type, id, element, title, year }) => {
     id = id + "/external_ids";
   }
 
-  // console.log(type);
+  // console.log(id);
   useEffect(() => {
     const fetchMedia = async () => {
       setLoading(true);
@@ -25,16 +27,37 @@ const TMDBCard = ({ type, id, element, title, year }) => {
         .catch((error) => console.error("fetch error:", error));
       // console.log(res);
       setURL(res["imdb_id"] + type + res["id"]);
+
+      // begin logic for making a call to omdb if there is no poster from tmdb
+      if (type === "/tv/" || type === "/movie/") {
+        if (!element["poster_path"]) {
+          // console.log(element);
+          const secondRes = await fetch(
+            "https://www.omdbapi.com/?i=" + res["imdb_id"] + "&apikey=5371282f"
+          )
+            .then((res) => res.json())
+            .catch((error) => setOmdb(false));
+          // if we have a poster in the response
+          if (secondRes["Response"] !== "False") {
+            if (secondRes["Poster"] !== "N/A") {
+              setURL2(secondRes["Poster"]);
+              setOmdb(true);
+            }
+          }
+        }
+      }
       setLoading(false);
     };
     fetchMedia();
-  }, [id, type]);
+  }, [id, type, element]);
 
   if (loading) {
     return <></>;
   }
+
   // we may need to link, I'll ask Caterina though
   // <Link to={{ pathname: "/info", search: "id=" + url, hash: "" }}>
+
   // console.log(element);
 
   // error checking for edge cases when title isn't named something we would normally expect
@@ -50,10 +73,15 @@ const TMDBCard = ({ type, id, element, title, year }) => {
   if (element["media_type"] === "person" && element["profile_path"]) {
     image = image + element["profile_path"];
   } else if (!element["poster_path"]) {
+    // no image available from wiki
     image =
       "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
   } else {
     image = image + element["poster_path"];
+  }
+
+  if (!element["poster_path"] && omdb) {
+    image = secondaryUrl;
   }
 
   return (
