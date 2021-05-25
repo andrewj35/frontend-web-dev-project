@@ -1,5 +1,5 @@
 // import { params } from "../App";
-import "./Results.css";
+//import "./Results.css";
 import { useState, useEffect } from "react";
 import { CardList } from "../searchComponent/cardList";
 
