@@ -25,24 +25,28 @@ h1 {
   top: 0;
   background-color: transparent;
   height: 50px;
-
   justify-content: space-between;
   border-radius: 5px;
+  
 }
 
 .nav-link:hover {
-  background-color: rgb(6, 7, 7);
-  padding: 15px;
-
-  size: 15px;
-  transform: scale(1);
+  
+  text-decoration: none;
+  opacity: 0.7;
+  color: white;
+  font-size: 18px;
+  
+  
 }
 .navbar-brand:hover {
-  background-color: rgb(6, 7, 7);
-  padding: 10px;
-  size: 35px;
-  transform: scale(1);
+  
+  text-decoration: none;
+  opacity: 0.8;
+  color: white;
+  font-size: 18px;
 }
+
 .nav-link {
   display: block;
   text-align: left;
@@ -56,3 +60,8 @@ h1 {
   text-decoration: none;
   padding: 0 5 0 0;
 }
+
+.nav-link #current{
+  background-color: blue;
+}
+

@@ -94,12 +94,12 @@ class Main extends React.Component {
   render() {
     return (
       <div className="custom-navbar">
-        <Navbar id="navbar" bg="dark" variant="dark" expand="lg">
-          <Navbar.Brand href="/">App Name</Navbar.Brand>
+        <Navbar id="navbar" bg="black" variant="dark" expand="lg">
+          <Navbar.Brand className="active" href="/">App Name</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav id="nav" className="mr-auto">
-              <Nav.Link href="/movie/popular/">Popular Movies</Nav.Link>
+            <Nav id="nav" className="mr-auto" bg="black">
+              <Nav.Link id= "current" href="/movie/popular/">Popular Movies</Nav.Link>
               <Nav.Link href="/tv/popular/">Popular TV Shows</Nav.Link>
               <Nav.Link href="/movie/top_rated/">Top Rated Movies</Nav.Link>
               <Nav.Link href="/tv/top_rated/">Top Rated TV Shows</Nav.Link>
