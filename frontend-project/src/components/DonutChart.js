@@ -1,6 +1,6 @@
 import { Doughnut } from "react-chartjs-2";
-import "./DonutChart.css";
-import "./Info.css";
+import "../styles/DonutChart.css";
+import "../styles/Info.css";
 
 const DonutChart = ({ rating }) => {
   let ratingVal = rating["Value"].substring(0, rating["Value"].indexOf("/"));

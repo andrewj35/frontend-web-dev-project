@@ -7,7 +7,6 @@
   margin: 0;
 }
 
-
 .box1 {
   display: flex;
   float: left;
@@ -20,7 +19,7 @@
   margin-top: 20px;
 }
 
-img{
+.box1 img {
   margin-right: 20px;
 }
 
@@ -51,37 +50,32 @@ p {
   padding-bottom: 100px;
 }
 
-
 @media (min-width: 580px) and (max-width: 769px) {
-  .container{
+  .container {
     width: 100%;
     margin: 0;
-    ;
-  }  
-  p{
+  }
+  p {
     width: 100%;
   }
 
-  .box1{
+  .box1 {
     display: inline-block;
     justify-content: space-evenly;
     margin: 0;
     font-size: 15px;
     width: 100%;
-        
   }
-  img{
+  img {
     width: 130px;
     margin-left: 170px;
     justify-content: center;
     height: 170px;
   }
 
-  .box2{
+  .box2 {
     padding-bottom: 80px;
     width: 100%;
     justify-content: space-between;
   }
-  
-  
 }

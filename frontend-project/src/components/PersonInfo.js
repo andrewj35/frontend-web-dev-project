@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TMDBCard from "./TMDBCard";
-import "./personInfo.css";
+import "../styles/personInfo.css";
 
 const PersonInfo = ({ tmdbID }) => {
   const [loading, setLoading] = useState(true);

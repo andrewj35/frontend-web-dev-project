@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./ListMedia.css";
+import "../styles/ListMedia.css";
 import PosterGrid from "./PosterGrid";
 import Pagination from "react-js-pagination";
 

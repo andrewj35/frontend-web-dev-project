@@ -2,7 +2,7 @@ import DonutChart from "./DonutChart";
 import { useState, useEffect } from "react";
 import PersonLink from "./PersonLink";
 import Person from "./PersonInfo";
-import "./Info.css";
+import "../styles/Info.css";
 
 /**
  * Maybe be worth it to look into switching our tmdb search calls to
@@ -127,7 +127,9 @@ export default function Info(props) {
         </h2>
         <div className="box1">
           <img
-            src={media["Poster"]} width="300px" height="440px"
+            src={media["Poster"]}
+            width="300px"
+            height="440px"
             alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
           />
           <p>Plot: {media["Plot"]}</p>
