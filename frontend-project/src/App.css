@@ -18,6 +18,7 @@ h1 {
 
 * {
   border: 1px;
+  justify-content: space-evenly;
 }
 
 #navbar {
@@ -62,15 +63,17 @@ h1 {
 }
 
 .current{
-  color: red;
-  
-  
+  color: red;  
 }
 
 a{
   color: white;
+  padding: 10px;
 }
 
 .active{
-  padding-right: 5px;
+  padding-right: 1px;
+}
+#nav{
+  justify-content: space-evenly;
 }
