@@ -79,11 +79,10 @@ class Main extends React.Component {
             <Nav id="nav" className="mr-auto" bg="black">
               
               <NavLink to="/movie/popular/1" href="/movie/popular/1" activeClassName="current">
-                Popular Movies
-              </NavLink>
-              <Nav.Link href="/tv/popular/1">Popular TV Shows</Nav.Link>
-              <Nav.Link href="/movie/top_rated/1">Top Rated Movies</Nav.Link>
-              <Nav.Link href="/tv/top_rated/1" >Top Rated TV Shows</Nav.Link>
+                Popular Movies </NavLink>
+              <NavLink to="/tv/popular/1" href="/tv/popular/1" activeStyle={{color:"red"}}>  Popular TV Shows </NavLink>
+              <NavLink to="/movie/top_rated/1" href="/movie/top_rated/1" activeStyle={{color:"red"}}> Top Rated Movies </NavLink>
+              <NavLink to="/tv/top_rated/1" href="/tv/top_rated/1" activeStyle={{color:"red"}}> Top Rated TV Shows</NavLink>
             </Nav>
 
             <Form id="search-form" inline onSubmit={this.afterSubmission}>
