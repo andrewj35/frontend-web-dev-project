@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { NavLink, Redirect, Route, Switch, withRouter } from "react-router-dom";
+
 import {
   PopMovies,
   PopTVShows,
@@ -76,12 +77,13 @@ class Main extends React.Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav id="nav" className="mr-auto" bg="black">
-              <Nav.Link id="current" href="/movie/popular/1">
+              
+              <NavLink to="/movie/popular/1" href="/movie/popular/1" activeClassName="current">
                 Popular Movies
-              </Nav.Link>
+              </NavLink>
               <Nav.Link href="/tv/popular/1">Popular TV Shows</Nav.Link>
               <Nav.Link href="/movie/top_rated/1">Top Rated Movies</Nav.Link>
-              <Nav.Link href="/tv/top_rated/1">Top Rated TV Shows</Nav.Link>
+              <Nav.Link href="/tv/top_rated/1" >Top Rated TV Shows</Nav.Link>
             </Nav>
 
             <Form id="search-form" inline onSubmit={this.afterSubmission}>

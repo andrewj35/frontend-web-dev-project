@@ -61,7 +61,16 @@ h1 {
   padding: 0 5 0 0;
 }
 
-.nav-link #current{
-  background-color: blue;
+.current{
+  color: red;
+  
+  
 }
 
+a{
+  color: white;
+}
+
+.active{
+  padding: 5px;
+}
