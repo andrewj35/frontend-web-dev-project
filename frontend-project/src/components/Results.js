@@ -56,7 +56,7 @@ export default function Results(props) {
   } else {
     return (
       <div>
-        <h1>Results for: {props["match"]["params"]["title"]}</h1>
+        <h1>Results for: {props["match"]["params"]["title"]}</h1> 
         <div className="container">
           <PosterGrid media={resultsArray} loading={loading} param={"any"} />
           <br />
