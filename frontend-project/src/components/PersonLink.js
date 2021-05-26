@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./personInfo.css";
 
 const PersonLink = ({ id, last, personName }) => {
   let [person, setPerson] = useState();

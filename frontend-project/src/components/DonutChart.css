@@ -2,3 +2,18 @@ div.chart-container {
   /* height: 200px; */
   width: 200px;
 }
+
+@media (min-width: 580px) and (max-width: 769px) {
+  .chart-container{
+    width: 130px;
+    justify-content: space-evenly;
+  }
+  #ratingsChart{
+    width: 100px;
+    height: 100px;
+    justify-content: space-evenly;
+    display: inline-block;
+
+    
+  }
+} 

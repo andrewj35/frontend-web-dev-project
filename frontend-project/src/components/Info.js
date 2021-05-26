@@ -127,7 +127,7 @@ export default function Info(props) {
         </h2>
         <div className="box1">
           <img
-            src={media["Poster"]}
+            src={media["Poster"]} width="300px" height="440px"
             alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
           />
           <p>Plot: {media["Plot"]}</p>

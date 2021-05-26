@@ -34,6 +34,7 @@ const DonutChart = ({ rating }) => {
         role="img"
         data={data}
         options={{
+          aspectRatio: 1,
           title: {
             display: true,
             text: rating["Source"],
