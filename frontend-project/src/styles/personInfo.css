@@ -1,3 +1,23 @@
 a:link {
   color: rgb(32, 32, 245);
 }
+
+.Personal{
+  display: flex;
+  flex-wrap: wrap;
+  
+  float: left;
+  width: 100%;
+      
+}
+.Personal > img{
+  
+  justify-content: center;
+  align-content: center;
+}
+.Personal > p{
+  text-align: justify;
+  margin-left: 0%;
+  width: 100%;
+
+}
