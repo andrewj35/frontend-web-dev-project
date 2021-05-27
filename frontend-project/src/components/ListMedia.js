@@ -5,6 +5,8 @@ import PosterGrid from "./PosterGrid";
 import Pagination from "react-js-pagination";
 
 const ListMedia = (props) => {
+  // error handling so we don't swallow exceptions from actual bugs in components
+  const [error, setError] = useState(null);
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(false);
   let [page, setPage] = useState(parseInt(props["page"]));
@@ -15,7 +17,7 @@ const ListMedia = (props) => {
   useEffect(() => {
     const fetchMedia = async () => {
       setLoading(true);
-      const res = await fetch(
+      await fetch(
         "https://api.themoviedb.org/3" +
           param +
           "?api_key=" +
@@ -24,17 +26,21 @@ const ListMedia = (props) => {
           page
       )
         .then((res) => res.json())
-        .catch((error) => console.error("fetch error:", error));
-      setMedia(res.results);
-      // total_pages = res.total_pages;
-      setTotal_pages(res.total_pages);
-      setLoading(false);
+        .then(
+          (result) => {
+            setMedia(result.results);
+            setTotal_pages(result.total_pages);
+            setLoading(false);
+          },
+          (error) => {
+            setError(error);
+            setLoading(false);
+          }
+        );
     };
 
     fetchMedia();
   }, [param, page]); // there is a dependency on param being initialized - if we could get rid of it it'd be nice
-
-  // console.log(media);
 
   function changePage(event) {
     window.history.pushState(
@@ -50,28 +56,34 @@ const ListMedia = (props) => {
     setPage(event);
   }
 
-  // return the container with the Movies and Pagination children components
-  return (
-    <>
-      <div className="container">
-        <PosterGrid media={media} loading={loading} param={props["param"]} />
-        <br />
-        <div className="pagination justify-content-center">
-          <Pagination
-            itemClass="page-item"
-            linkClass="page-link"
-            itemsCountPerPage={20}
-            activePage={page}
-            totalItemsCount={total_pages * 20}
-            pageRangeDisplayed={5}
-            onChange={(event) => changePage(event)}
-            hideNavigation={true}
-          />
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (loading) {
+    return <></>;
+  } else {
+    // return the container with the Movies and Pagination children components
+    return (
+      <>
+        <div className="container">
+          <PosterGrid media={media} loading={loading} param={props["param"]} />
+          <br />
+          <div className="pagination justify-content-center">
+            <Pagination
+              itemClass="page-item"
+              linkClass="page-link"
+              itemsCountPerPage={20}
+              activePage={page}
+              totalItemsCount={total_pages * 20}
+              pageRangeDisplayed={5}
+              onChange={(event) => changePage(event)}
+              hideNavigation={true}
+            />
+          </div>
+          <br />
         </div>
-        <br />
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 };
 
 export default ListMedia;

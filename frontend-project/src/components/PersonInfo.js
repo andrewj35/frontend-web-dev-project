@@ -3,6 +3,8 @@ import TMDBCard from "./TMDBCard";
 import "../styles/personInfo.css";
 
 const PersonInfo = ({ tmdbID }) => {
+  // error handling so we don't swallow exceptions from actual bugs in components
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [person, setPerson] = useState([]);
   const [credits, setCredits] = useState([]);
@@ -18,8 +20,14 @@ const PersonInfo = ({ tmdbID }) => {
           "&language=en-US"
       )
         .then((res) => res.json())
-        .then((res) => setPerson(res))
-        .catch((error) => console.error(error));
+        .then(
+          (res) => {
+            setPerson(res);
+          },
+          (error) => {
+            setError(error);
+          }
+        );
 
       await fetch(
         "https://api.themoviedb.org/3/person/" +
@@ -29,14 +37,22 @@ const PersonInfo = ({ tmdbID }) => {
           "&language=en-US"
       )
         .then((res) => res.json())
-        .then((res) => setCredits(res))
-        .then(setLoading(false))
-        .catch((error) => console.error(error));
+        .then(
+          (res) => {
+            setCredits(res);
+          },
+          (error) => {
+            setError(error);
+          }
+        )
+        .then(setLoading(false));
     };
     fetchInfo();
   }, [tmdbID]);
 
-  if (loading) {
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (loading) {
     return <></>;
   } else {
     console.log(credits);
@@ -90,37 +106,6 @@ const PersonInfo = ({ tmdbID }) => {
             </div>
           );
         });
-        // credits.cast.forEach((element, i) => {
-        //   acting.push(
-        //     <div key={i}>
-        //       {`name` in element ? (
-        //         <h1>{element["name"]}</h1>
-        //       ) : `title` in element ? (
-        //         <h1>{element["title"]}</h1>
-        //       ) : (
-        //         <></>
-        //       )}
-        //       {`poster_path` in element ? (
-        //         element["poster_path"] ? (
-        //           <img
-        //             width="225px"
-        //             height="300px"
-        //             src={
-        //               "https://image.tmdb.org/t/p/original/" +
-        //               element["poster_path"]
-        //             }
-        //             alt={`poster for ` + element["name"]}
-        //           />
-        //         ) : (
-        //           <></>
-        //         )
-        //       ) : (
-        //         <></>
-        //       )}{" "}
-        //       {`character` in element ? <p>{element["character"]}</p> : <></>}
-        //     </div>
-        //   );
-        // });
       }
     }
 

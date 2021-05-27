@@ -20,6 +20,8 @@ import "../styles/Info.css";
  */
 
 export default function Info(props) {
+  // error handling so we don't swallow exceptions from actual bugs in components
+  const [error, setError] = useState(null);
   // Array of objects for our output
   const [media, setMedia] = useState([]);
   // Array of ratings, if omdb call was successful, to output
@@ -44,7 +46,12 @@ export default function Info(props) {
           "&apikey=" +
           process.env.REACT_APP_OMDB_API_KEY
       )
-        .then((res) => res.json())
+        .then(
+          (res) => res.json(),
+          (error) => {
+            setError(error);
+          }
+        )
         .catch(() => setOmdb(false));
 
       // If omdb doesn't have the media, thus we need to get the information from tmdb
@@ -64,8 +71,13 @@ export default function Info(props) {
               process.env.REACT_APP_TMDB_API_KEY +
               "&language=en-US"
           )
-            .then((res) => res.json())
-            .catch((error) => console.error("fetch error:", error));
+            .then(
+              (res) => res.json(),
+              (error) => {
+                setError(error);
+              }
+            )
+            .catch((err) => console.error("fetch error:", err));
         }
         if (specificRes.length === 0 || specificRes["success"] === false) {
           specificRes = await fetch(
@@ -77,7 +89,10 @@ export default function Info(props) {
               process.env.REACT_APP_TMDB_API_KEY +
               "&language=en-US"
           )
-            .then((res) => res.json())
+            .then(
+              (res) => res.json(),
+              (error) => setError(error)
+            )
             .catch((error) => console.error("fetch error:", error));
         }
 
@@ -125,38 +140,122 @@ export default function Info(props) {
     fetchMedia();
   }, [type, id, tmdbID]);
 
-  if (loading) {
+  if (error) {
+    <div>Error: {error.message}</div>;
+  } else if (loading) {
     return <></>;
-  }
+  } else {
+    if (omdb && media && tmdb !== []) {
+      // console.log(media);
+      return (
+        <div className="container">
+          <h2>
+            {media["Title"]} ({media["Year"]})
+          </h2>
+          <div className="box1">
+            <img
+              src={media["Poster"]}
+              width="300px"
+              height="440px"
+              alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
+            />
+            <p>Plot: {media["Plot"]}</p>
+            <p>Genre(s): {media["Genre"]}</p>
 
-  if (omdb && media && tmdb !== []) {
-    // console.log(media);
-    return (
-      <div className="container">
-        <h2>
-          {media["Title"]} ({media["Year"]})
-        </h2>
-        <div className="box1">
-          <img
-            src={media["Poster"]}
-            width="300px"
-            height="440px"
-            alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
-          />
-          <p>Plot: {media["Plot"]}</p>
-          <p>Genre(s): {media["Genre"]}</p>
+            {media["BoxOffice"] ? (
+              <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
+            ) : (
+              <p></p>
+            )}
 
-          {media["BoxOffice"] ? (
-            <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
+            <p>Director(s): {media["Director"]}</p>
+
+            {tmdb.length !== 0 && `cast` in tmdb ? (
+              <p>
+                Cast:{" "}
+                {tmdb["cast"].map((each, i) =>
+                  i === tmdb["cast"].length - 1 ? (
+                    <PersonLink
+                      key={each["id"]}
+                      id={each["id"]}
+                      last={true}
+                      personName={each["name"]}
+                    />
+                  ) : (
+                    <PersonLink
+                      key={each["id"]}
+                      id={each["id"]}
+                      last={false}
+                      personName={each["name"]}
+                    />
+                  )
+                )}
+              </p>
+            ) : (
+              <p>Cast: {media["Actors"]}</p>
+            )}
+            <p>Writers: {media["Writer"]}</p>
+            <p>Runtime: {media["Runtime"]}</p>
+          </div>
+          <div className="box2">
+            {ratings ? (
+              ratings.map((each) => (
+                <DonutChart rating={each} key={each["Source"]} />
+              ))
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      );
+      // tmdb only and a person wasn't selected
+    } else if (type !== "person") {
+      return (
+        <div className="container">
+          {`title` in media && `release_date` in media ? (
+            <h2>
+              {media["title"]} ({media["release_date"].slice(0, 4)})
+            </h2>
           ) : (
-            <p></p>
+            <h2>{media["title"]} </h2>
           )}
+          <div className="TMDB-box">
+            {`release_date` in media ? (
+              <img
+                height="350px"
+                width="350px"
+                src={
+                  `https://image.tmdb.org/t/p/original/` + media["poster_path"]
+                }
+                alt={
+                  `poster for ` +
+                  media["title"] +
+                  ` (` +
+                  media["release_date"].slice(0, 4) +
+                  `)`
+                }
+              />
+            ) : (
+              <img
+                src={
+                  `https://image.tmdb.org/t/p/original/` + media["poster_path"]
+                }
+                alt={`poster for ` + media["title"]}
+              />
+            )}
 
-          <p>Director(s): {media["Director"]}</p>
-
-          {tmdb.length !== 0 && `cast` in tmdb ? (
             <p>
-              Cast:{" "}
+              <br></br>
+              <b>Overview: </b>
+              <br></br> {media["overview"]}
+            </p>
+          </div>
+
+          {/* <p>Box Office: {media["revenue"]}</p> */}
+          <div className="TMDB-box2">
+            <p>
+              <br></br>
+              Cast: <br></br>
               {tmdb["cast"].map((each, i) =>
                 i === tmdb["cast"].length - 1 ? (
                   <PersonLink
@@ -166,6 +265,7 @@ export default function Info(props) {
                     personName={each["name"]}
                   />
                 ) : (
+                  // each["name"] + `, `
                   <PersonLink
                     key={each["id"]}
                     id={each["id"]}
@@ -175,128 +275,45 @@ export default function Info(props) {
                 )
               )}
             </p>
-          ) : (
-            <p>Cast: {media["Actors"]}</p>
-          )}
-          <p>Writers: {media["Writer"]}</p>
-          <p>Runtime: {media["Runtime"]}</p>
-        </div>
-        <div className="box2">
-          {ratings ? (
-            ratings.map((each) => (
-              <DonutChart rating={each} key={each["Source"]} />
-            ))
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
-    );
-    // tmdb only and a person wasn't selected
-  } else if (type !== "person") {
-    return (
-      <div className="container">
-        {`title` in media && `release_date` in media ? (
-          <h2>
-            {media["title"]} ({media["release_date"].slice(0, 4)})
-          </h2>
-        ) : (
-          <h2>{media["title"]} </h2>
-        )}
-        <div className="TMDB-box">
-          {`release_date` in media ? (
-            <img
-              height="350px"
-              width="350px"
-              src={
-                `https://image.tmdb.org/t/p/original/` + media["poster_path"]
-              }
-              alt={
-                `poster for ` +
-                media["title"] +
-                ` (` +
-                media["release_date"].slice(0, 4) +
-                `)`
-              }
-            />
-          ) : (
-            <img
-              src={
-                `https://image.tmdb.org/t/p/original/` + media["poster_path"]
-              }
-              alt={`poster for ` + media["title"]}
-            />
-          )}
-
-          <p>
-            <br></br>
-            <b>Overview: </b>
-            <br></br> {media["overview"]}
-          </p>
-        </div>
-
-        {/* <p>Box Office: {media["revenue"]}</p> */}
-        <div className="TMDB-box2">
-          <p>
-            <br></br>
-            Cast: <br></br>
-            {tmdb["cast"].map((each, i) =>
-              i === tmdb["cast"].length - 1 ? (
-                <PersonLink
-                  key={each["id"]}
-                  id={each["id"]}
-                  last={true}
-                  personName={each["name"]}
-                />
-              ) : (
-                // each["name"] + `, `
-                <PersonLink
-                  key={each["id"]}
-                  id={each["id"]}
-                  last={false}
-                  personName={each["name"]}
-                />
-              )
+            {media["budget"] ? (
+              <p key={media["budget"]}>Budget: {media["budget"]}</p>
+            ) : (
+              <p></p>
             )}
-          </p>
-          {media["budget"] ? (
-            <p key={media["budget"]}>Budget: {media["budget"]}</p>
-          ) : (
-            <p></p>
-          )}
-          {`production_companies` in media ? (
-            <p>
-              Production Companies: <br></br>
-              {media["production_companies"].map((each, i) =>
-                i === media["production_companies"].length - 1
-                  ? each["name"]
-                  : each["name"] + `, `
-              )}
-            </p>
-          ) : (
-            <p></p>
-          )}
+            {`production_companies` in media ? (
+              <p>
+                Production Companies: <br></br>
+                {media["production_companies"].map((each, i) =>
+                  i === media["production_companies"].length - 1
+                    ? each["name"]
+                    : each["name"] + `, `
+                )}
+              </p>
+            ) : (
+              <p></p>
+            )}
 
-          {tmdb["crew"].map((each) => (
-            <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
-          ))}
+            {tmdb["crew"].map((each) => (
+              <p key={each["name"]}>{each["job"] + `: ` + each["name"]}</p>
+            ))}
 
-          {media["homepage"] ? (
-            <a href={media["homepage"]} key={media["homepage"]}>
-              Homepage
-            </a>
-          ) : (
-            <></>
-          )}
+            {media["homepage"] ? (
+              <a href={media["homepage"]} key={media["homepage"]}>
+                Homepage
+              </a>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
-      </div>
-    );
-    // output person
-  } else {
-    return (
-      <div className="container">
-        <Person tmdbID={tmdbID} />
-      </div>
-    );
+      );
+      // output person
+    } else {
+      return (
+        <div className="container">
+          <Person tmdbID={tmdbID} />
+        </div>
+      );
+    }
   }
 }

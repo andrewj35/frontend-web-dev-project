@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "../styles/personInfo.css";
 
 const PersonLink = ({ id, last, personName }) => {
+  // error handling so we don't swallow exceptions from actual bugs in components
+  const [error, setError] = useState(null);
   let [person, setPerson] = useState();
   // let [credits, setCredits] = useState();
   const [loading, setLoading] = useState(false);
@@ -12,7 +14,7 @@ const PersonLink = ({ id, last, personName }) => {
   useEffect(() => {
     const fetchInfo = async () => {
       setLoading(true);
-      const getDetails = await fetch(
+      await fetch(
         "https://api.themoviedb.org/3/person/" +
           id +
           "?api_key=" +
@@ -20,11 +22,16 @@ const PersonLink = ({ id, last, personName }) => {
           "&language=en-US"
       )
         .then((res) => res.json())
-        .catch((error) => console.error("fetch error:", error));
-
-      setPerson(getDetails);
-      // setCredits(getCredits);
-      setLoading(false);
+        .then(
+          (result) => {
+            setPerson(result);
+            setLoading(false);
+          },
+          (error) => {
+            setError(error);
+            setLoading(false);
+          }
+        );
     };
     fetchInfo();
   }, [id]);
@@ -32,25 +39,27 @@ const PersonLink = ({ id, last, personName }) => {
   // console.log(typeof personName);
   // console.log(credits);
 
-  if (loading) {
+  if (error) {
+    return <div>Error: {error.messsage}</div>;
+  } else if (loading) {
     return <></>;
-  }
-
-  if (person) {
-    let name = person["name"];
-    if (!last) {
-      name = name + ",";
-    }
-    return (
-      <a
-        href={baseURL + person["tmdb_id"] + "/person/" + person["id"]}
-        key={id}
-      >
-        {name}{" "}
-      </a>
-    );
   } else {
-    return personName;
+    if (person) {
+      let name = person["name"];
+      if (!last) {
+        name = name + ",";
+      }
+      return (
+        <a
+          href={baseURL + person["tmdb_id"] + "/person/" + person["id"]}
+          key={id}
+        >
+          {name}{" "}
+        </a>
+      );
+    } else {
+      return personName;
+    }
   }
 };
 

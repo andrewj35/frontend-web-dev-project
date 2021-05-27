@@ -26,3 +26,6 @@ Note:
   - API key is ?api_key=b0011e93f013cfbed3110a3729a3e3c5
   - This allows us to query for things such as top rated movies,
     popular movies, etc.
+
+API calls made, and error handling set up, per reactjs documentation:
+- https://reactjs.org/docs/faq-ajax.html (hooks)
