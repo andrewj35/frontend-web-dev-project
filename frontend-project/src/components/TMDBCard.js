@@ -21,7 +21,9 @@ const TMDBCard = ({ type, id, element, title, year }) => {
         "https://api.themoviedb.org/3" +
           type +
           id +
-          "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+          "?api_key=" +
+          process.env.REACT_APP_TMDB_API_KEY +
+          "&language=en-US"
       )
         .then((res) => res.json())
         .catch((error) => console.error("fetch error:", error));
@@ -33,7 +35,10 @@ const TMDBCard = ({ type, id, element, title, year }) => {
         if (!element["poster_path"]) {
           // console.log(element);
           const secondRes = await fetch(
-            "https://www.omdbapi.com/?i=" + res["imdb_id"] + "&apikey=5371282f"
+            "https://www.omdbapi.com/?i=" +
+              res["imdb_id"] +
+              "&apikey=" +
+              process.env.REACT_APP_OMDB_API_KEY
           )
             .then((res) => res.json())
             .catch((error) => setOmdb(false));

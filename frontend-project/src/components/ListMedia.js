@@ -18,7 +18,9 @@ const ListMedia = (props) => {
       const res = await fetch(
         "https://api.themoviedb.org/3" +
           param +
-          "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US&page=" +
+          "?api_key=" +
+          process.env.REACT_APP_TMDB_API_KEY +
+          "&language=en-US&page=" +
           page
       )
         .then((res) => res.json())

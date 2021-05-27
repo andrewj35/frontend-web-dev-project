@@ -39,7 +39,10 @@ export default function Info(props) {
     const fetchMedia = async () => {
       setLoading(true);
       const res = await fetch(
-        "https://www.omdbapi.com/?i=" + id + "&apikey=5371282f"
+        "https://www.omdbapi.com/?i=" +
+          id +
+          "&apikey=" +
+          process.env.REACT_APP_OMDB_API_KEY
       )
         .then((res) => res.json())
         .catch(() => setOmdb(false));
@@ -57,7 +60,9 @@ export default function Info(props) {
               type +
               "/" +
               id +
-              "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+              "?api_key=" +
+              process.env.REACT_APP_TMDB_API_KEY +
+              "&language=en-US"
           )
             .then((res) => res.json())
             .catch((error) => console.error("fetch error:", error));
@@ -68,7 +73,9 @@ export default function Info(props) {
               type +
               "/" +
               tmdbID +
-              "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+              "?api_key=" +
+              process.env.REACT_APP_TMDB_API_KEY +
+              "&language=en-US"
           )
             .then((res) => res.json())
             .catch((error) => console.error("fetch error:", error));
@@ -91,7 +98,9 @@ export default function Info(props) {
             type +
             "/" +
             id +
-            "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+            "/credits?api_key=" +
+            process.env.REACT_APP_TMDB_API_KEY +
+            "&language=en-US"
         )
           .then((res) => res.json())
           .catch((error) => console.error("fetch error:", error));
@@ -102,7 +111,9 @@ export default function Info(props) {
             type +
             "/" +
             tmdbID +
-            "/credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+            "/credits?api_key=" +
+            process.env.REACT_APP_TMDB_API_KEY +
+            "&language=en-US"
         )
           .then((res) => res.json())
           .catch((error) => console.error("fetch error:", error));

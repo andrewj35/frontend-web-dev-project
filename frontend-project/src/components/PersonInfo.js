@@ -13,7 +13,9 @@ const PersonInfo = ({ tmdbID }) => {
       await fetch(
         "https://api.themoviedb.org/3/person/" +
           tmdbID +
-          "?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+          "?api_key=" +
+          process.env.REACT_APP_TMDB_API_KEY +
+          "&language=en-US"
       )
         .then((res) => res.json())
         .then((res) => setPerson(res))
@@ -22,7 +24,9 @@ const PersonInfo = ({ tmdbID }) => {
       await fetch(
         "https://api.themoviedb.org/3/person/" +
           tmdbID +
-          "/combined_credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US"
+          "/combined_credits?api_key=" +
+          process.env.REACT_APP_TMDB_API_KEY +
+          "&language=en-US"
       )
         .then((res) => res.json())
         .then((res) => setCredits(res))

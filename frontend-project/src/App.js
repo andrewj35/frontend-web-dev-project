@@ -88,23 +88,20 @@ class Main extends React.Component {
                 href="/tv/popular/1"
                 activeStyle={{ color: "red" }}
               >
-                {" "}
-                Popular TV Shows{" "}
+                Popular TV Shows
               </NavLink>
               <NavLink
                 to="/movie/top_rated/1"
                 href="/movie/top_rated/1"
                 activeStyle={{ color: "red" }}
               >
-                {" "}
-                Top Rated Movies{" "}
+                Top Rated Movies
               </NavLink>
               <NavLink
                 to="/tv/top_rated/1"
                 href="/tv/top_rated/1"
                 activeStyle={{ color: "red" }}
               >
-                {" "}
                 Top Rated TV Shows
               </NavLink>
             </Nav>
@@ -130,26 +127,35 @@ class Main extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
+          {/* Popular movies */}
           <Redirect exact from="/" to="/movie/popular/1" />
           <Redirect exact path="/movie/popular/" to="/movie/popular/1" />
           <Route exact path="/movie/popular/:page" component={PopMovies} />
 
+          {/* Popular tv shows */}
           <Redirect exact path="/tv/popular/" to="/tv/popular/1" />
           <Route exact path="/tv/popular/:page" component={PopTVShows} />
 
+          {/* Top rated movies */}
           <Redirect exact path="/movie/top_rated/" to="/movie/top_rated/1" />
           <Route
             exact
             path="/movie/top_rated/:page"
             component={TopRatedMovies}
           />
+
+          {/* Top rated tv shows */}
           <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" />
           <Route exact path="/tv/top_rated/:page" component={TopRatedTVShows} />
+
+          {/* Display information about movie/tv show/short/person */}
           <Route
             exact
             path="/info/:imdbID/:mediaType/:tmdbID?"
             component={Info}
           />
+
+          {/* Search results page */}
           <Redirect exact path="/results/:title/" to="/results/:title/1" />
           <Route exact path="/results/:title/:page" component={Results} />
 
