@@ -176,10 +176,10 @@ export default function Info(props) {
               )}
             </p>
           ) : (
-            <p>Cast: {media["Actors"]}</p>
+            <p><br></br>Cast:{media["Actors"]}</p>
           )}
-          <p>Writers: {media["Writer"]}</p>
-          <p>Runtime: {media["Runtime"]}</p>
+          <p><br></br>Writers: {media["Writer"]}</p>
+          <p><br></br>Runtime: {media["Runtime"]}</p>
         </div>
         <div className="box2">
           {ratings ? (
