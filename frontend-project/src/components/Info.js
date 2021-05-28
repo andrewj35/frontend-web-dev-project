@@ -243,7 +243,6 @@ export default function Info(props) {
                 alt={`poster for ` + media["title"]}
               />
             )}
-
             <p>
               <br></br>
               <b>Overview: </b>

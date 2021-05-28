@@ -7,17 +7,38 @@
   margin: 0;
 }
 
+.container > h2{
+  text-align: center;
+  padding-bottom: 5px;
+}
+
 .box1 {
   display: flex;
   float: left;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 10px;
-  height: 500px;
+  height: 400px;
   width: 600px;
   justify-content: space-evenly;
   margin-top: 20px;
 }
+
+.Box1a {
+  display: inline-block;
+  padding-top: 25px;
+  text-align: justify;
+  height: 100%;
+  width: 100%;
+  justify-content: space-evenly;
+  word-spacing: 0;
+  text-align: justify;
+  
+}
+.Box1a > p{
+  width: 1000px;
+}
+
 
 .box1 img {
   margin-right: 20px;
@@ -26,13 +47,14 @@
 p {
   margin: 0px;
   width: 700px;
+  
 }
 
 .box2 {
   display: flex;
   margin: 0;
   padding-bottom: 30px;
-  padding-top: 130px;
+  padding-top: 30px;
   width: 100%;
   justify-content: space-around;
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TMDBCard from "./TMDBCard";
 import "../styles/personInfo.css";
 
+
 const PersonInfo = ({ tmdbID }) => {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);
@@ -111,70 +112,81 @@ const PersonInfo = ({ tmdbID }) => {
 
     return (
       <div>
-        {`profile_path` in person ? (
-          person["profile_path"] ? (
-            <img src={image} alt={`poster of ` + person["name"]}></img>
-          ) : (
-            <></>
-          )
-        ) : (
-          <></>
-        )}
+        
         <h1>{person["name"]}</h1>
 
-        {`birthday` in person ? (
-          person["birthday"] ? (
-            <p>Birthday: {person["birthday"]}</p>
-          ) : (
-            <p>Birthday: Unknown</p>
-          )
-        ) : (
-          <></>
-        )}
-        {`biography` in person ? (
-          person["biography"] ? (
-            <p>About: {person["biography"]}</p>
-          ) : (
+        <div className="Personal">
+          {`profile_path` in person ? (
+            person["profile_path"] ? (
+              <img src={image} alt={`poster of ` + person["name"]} height="300px" width="250px"></img>
+            ) : (
             <></>
           )
-        ) : (
-          <></>
-        )}
-        {`homepage` in person ? (
-          person["homepage"] ? (
-            <a href={person["homepage"]}>Homepage</a>
           ) : (
             <></>
-          )
-        ) : (
-          <></>
-        )}
-        {`place_of_birth` in person ? (
-          person["place_of_birth"] ? (
-            <p>Place of birth: {person["place_of_birth"]}</p>
-          ) : (
-            <p>Place of birth: Unknown</p>
-          )
-        ) : (
-          <></>
-        )}
-        {`deathday` in person ? (
-          person["deathday"] ? (
-            <p>Died: {person["deathday"]}</p>
+          )}
+
+          {`birthday` in person ? (
+            person["birthday"] ? (
+              <p>Birthday: {person["birthday"]}</p>
+            ) : (
+              <p>Birthday: Unknown</p>
+            )
           ) : (
             <></>
-          )
-        ) : (
-          <></>
-        )}
-        {acting !== [] ? (
-          <div>
-            <h2>Acting credits:</h2> {acting}
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
+          )}
+          
+          {`place_of_birth` in person ? (
+            person["place_of_birth"] ? (
+              <p>Place of birth: {person["place_of_birth"]}</p>
+            ) : (
+              <p>Place of birth: Unknown</p>
+            )
+          ) : (
+            <></>
+          )}
+          {`biography` in person ? (
+            person["biography"] ? (
+              <p>About: {person["biography"]}</p>
+            ) : (
+              <></>
+            )
+          ) : (
+            <></>
+          )}
+          {`homepage` in person ? (
+            person["homepage"] ? (
+              <a href={person["homepage"]}>Homepage</a>
+            ) : (
+              <></>
+            )
+          ) : (
+            <></>
+          )}
+
+          
+          {`deathday` in person ? (
+            person["deathday"] ? (
+              <p>Died: {person["deathday"]}</p>
+            ) : (
+              <></>
+            )
+          ) : (
+            <></>
+          )}
+        
+        </div>
+        <div className="MovList">
+          {acting !== [] ? (
+            <div>
+              <h2>Acting credits:</h2> {acting}
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>  
+      
     );
   }
 };
