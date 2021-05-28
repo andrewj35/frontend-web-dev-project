@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TMDBCard from "./TMDBCard";
 import "../styles/personInfo.css";
 
+
 const PersonInfo = ({ tmdbID }) => {
   const [loading, setLoading] = useState(true);
   const [person, setPerson] = useState([]);
@@ -188,16 +189,19 @@ const PersonInfo = ({ tmdbID }) => {
           ) : (
             <></>
           )}
-        </div>
         
-        {acting !== [] ? (
-          <div>
-            <h2>Acting credits:</h2> {acting}
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
+        </div>
+        <div className="MovList">
+          {acting !== [] ? (
+            <div>
+              <h2>Acting credits:</h2> {acting}
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>  
+      
     );
   }
 };
