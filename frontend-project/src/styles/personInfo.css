@@ -1,7 +1,6 @@
 a:link {
   color: rgb(32, 32, 245);
 }
-
 .Personal{
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +22,6 @@ a:link {
 
 }
 
-
 #grid-item {
   
   border-radius: 0.5em;
@@ -32,8 +30,8 @@ a:link {
   width: 210px;
   overflow: hidden;
   margin: 2px;
-  display: inline-block;  
-              
+  display: inline-block;    
+  
 }
 
 #grid-item:hover,

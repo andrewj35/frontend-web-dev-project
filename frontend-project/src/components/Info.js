@@ -152,8 +152,8 @@ export default function Info(props) {
             <p></p>
           )}
 
-          <p>Director(s): {media["Director"]}</p>
-
+          <p>Director(s): {media["Director"]}</p></div>
+        <div className="Box1a">    
           {tmdb.length !== 0 && `cast` in tmdb ? (
             <p>
               Cast:{" "}
