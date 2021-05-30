@@ -143,20 +143,20 @@ export default function Info(props) {
             height="440px"
             alt={`poster for ` + media["Title"] + ` (` + media["Year"] + `)`}
           />
-          <p>Plot: {media["Plot"]}</p>
-          <p>Genre(s): {media["Genre"]}</p>
+          <p><b>Plot :</b> {media["Plot"]}</p>
+          <p><b>Genre(s) : </b> {media["Genre"]}</p>
 
           {media["BoxOffice"] ? (
-            <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
+            <p key={media["BoxOffice"]}><b>Box Office : </b> {media["BoxOffice"]}</p>
           ) : (
             <p></p>
           )}
 
-          <p>Director(s): {media["Director"]}</p></div>
+          <p><b> Director(s) : </b> {media["Director"]}</p></div>
         <div className="Box1a">    
           {tmdb.length !== 0 && `cast` in tmdb ? (
             <p>
-              Cast:{" "}
+              <b>Cast :</b>{" "}
               {tmdb["cast"].map((each, i) =>
                 i === tmdb["cast"].length - 1 ? (
                   <PersonLink
@@ -176,10 +176,10 @@ export default function Info(props) {
               )}
             </p>
           ) : (
-            <p><br></br>Cast:{media["Actors"]}</p>
+            <p><br></br><b>Cast :</b>{media["Actors"]}</p>
           )}
-          <p><br></br>Writers: {media["Writer"]}</p>
-          <p><br></br>Runtime: {media["Runtime"]}</p>
+          <p><br></br><b>Writers :</b> {media["Writer"]}</p>
+          <p><br></br><b>Runtime :</b> {media["Runtime"]}</p>
         </div>
         <div className="box2">
           {ratings ? (
@@ -260,13 +260,13 @@ export default function Info(props) {
             )}
           </p>
           {media["budget"] ? (
-            <p key={media["budget"]}>Budget: {media["budget"]}</p>
+            <p key={media["budget"]}><b>Budget :</b> {media["budget"]}</p>
           ) : (
             <p></p>
           )}
           {`production_companies` in media ? (
-            <p>
-              Production Companies: <br></br>
+            <p><b>
+              Production Companies :</b> <br></br>
               {media["production_companies"].map((each, i) =>
                 i === media["production_companies"].length - 1
                   ? each["name"]
@@ -283,7 +283,7 @@ export default function Info(props) {
 
           {media["homepage"] ? (
             <a href={media["homepage"]} key={media["homepage"]}>
-              Homepage
+              <b>Homepage</b>
             </a>
           ) : (
             <></>

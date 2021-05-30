@@ -143,9 +143,9 @@ const PersonInfo = ({ tmdbID }) => {
 
           {`birthday` in person ? (
             person["birthday"] ? (
-              <p>Birthday: {person["birthday"]}</p>
+              <p><b>Birthday :</b> {person["birthday"]}</p>
             ) : (
-              <p>Birthday: Unknown</p>
+              <p><b>Birthday :</b> Unknown</p>
             )
           ) : (
             <></>
@@ -153,16 +153,16 @@ const PersonInfo = ({ tmdbID }) => {
           
           {`place_of_birth` in person ? (
             person["place_of_birth"] ? (
-              <p>Place of birth: {person["place_of_birth"]}</p>
+              <p><b>Place of birth :</b> {person["place_of_birth"]}</p>
             ) : (
-              <p>Place of birth: Unknown</p>
+              <p><b>Place of birth :</b> Unknown</p>
             )
           ) : (
             <></>
           )}
           {`biography` in person ? (
             person["biography"] ? (
-              <p>About: {person["biography"]}</p>
+              <p><b>About :</b> {person["biography"]}</p>
             ) : (
               <></>
             )
@@ -171,7 +171,7 @@ const PersonInfo = ({ tmdbID }) => {
           )}
           {`homepage` in person ? (
             person["homepage"] ? (
-              <a href={person["homepage"]}>Homepage</a>
+              <a href={person["homepage"]}><b>Homepage</b></a>
             ) : (
               <></>
             )
@@ -182,7 +182,7 @@ const PersonInfo = ({ tmdbID }) => {
           
           {`deathday` in person ? (
             person["deathday"] ? (
-              <p>Died: {person["deathday"]}</p>
+              <p><b>Died :</b> {person["deathday"]}</p>
             ) : (
               <></>
             )
@@ -194,7 +194,7 @@ const PersonInfo = ({ tmdbID }) => {
         <div className="MovList">
           {acting !== [] ? (
             <div>
-              <h2>Acting credits:</h2> {acting}
+              <h2><b>Acting credits :</b></h2> {acting}
             </div>
           ) : (
             <></>
