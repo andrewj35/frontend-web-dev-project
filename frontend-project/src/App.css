@@ -19,6 +19,7 @@ h1 {
 * {
   border: 1px;
   justify-content: space-evenly;
+  
 }
 
 #navbar {
@@ -28,6 +29,8 @@ h1 {
   height: 50px;
   justify-content: space-between;
   border-radius: 5px;
+  font-weight: bold;
+  
 }
 
 .nav-link:hover {
@@ -64,6 +67,7 @@ h1 {
 a {
   color: white;
   padding: 10px;
+  
 }
 
 /* Don't want the padding from above to affect our grid of posters */
