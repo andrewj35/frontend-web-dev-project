@@ -5,6 +5,7 @@ import PopTVShows from "./PopTVShows";
 import TopRatedMovies from "./TopRatedMovies";
 import TopRatedTVShows from "./TopRatedTVShows";
 import Info from "./Info";
+import About from "./About";
 
 export {
   PopMovies,
@@ -14,4 +15,5 @@ export {
   Info,
   Results,
   NotFound,
+  About,
 };
