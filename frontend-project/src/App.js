@@ -9,6 +9,7 @@ import {
   Info,
   Results,
   NotFound,
+  About,
 } from "./components";
 import {
   Navbar,
@@ -71,7 +72,7 @@ class Main extends React.Component {
       <div className="custom-navbar">
         <Navbar id="navbar" bg="black" variant="dark" expand="lg">
           <Navbar.Brand className="active" href="/">
-            App Name
+            Movie Dashboard
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -103,6 +104,9 @@ class Main extends React.Component {
                 activeStyle={{ color: "red" }}
               >
                 Top Rated TV Shows
+              </NavLink>
+              <NavLink to="/About" href="/About" activeStyle={{ color: "red" }}>
+                About
               </NavLink>
             </Nav>
 
@@ -143,6 +147,9 @@ class Main extends React.Component {
             path="/movie/top_rated/:page"
             component={TopRatedMovies}
           />
+
+          {/* About */}
+          <Route exact path="/About" component={About} />
 
           {/* Top rated tv shows */}
           <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" />
