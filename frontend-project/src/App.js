@@ -72,7 +72,7 @@ class Main extends React.Component {
       <div className="custom-navbar">
         <Navbar id="navbar" bg="black" variant="dark" expand="lg">
           <Navbar.Brand className="active" href="/">
-            App Name
+            Movie Dashboard
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
