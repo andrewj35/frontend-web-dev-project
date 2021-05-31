@@ -9,6 +9,7 @@ import {
   Info,
   Results,
   NotFound,
+  About,
 } from "./components";
 import {
   Navbar,
@@ -104,6 +105,13 @@ class Main extends React.Component {
               >
                 Top Rated TV Shows
               </NavLink>
+              <NavLink
+                to="/About"
+                href="/About"
+                activeStyle={{ color: "red"}}
+                >
+                  About
+              </NavLink>
             </Nav>
 
             <Form id="search-form" inline onSubmit={this.afterSubmission}>
@@ -143,6 +151,10 @@ class Main extends React.Component {
             path="/movie/top_rated/:page"
             component={TopRatedMovies}
           />
+
+          {/* About */}
+          <Route exact path="/About" component={About} />
+
 
           {/* Top rated tv shows */}
           <Redirect exact path="/tv/top_rated/" to="/tv/top_rated/1" />
