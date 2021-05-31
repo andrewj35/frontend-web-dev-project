@@ -7,7 +7,7 @@
   margin: 0;
 }
 
-.container > h2{
+.container > h2 {
   text-align: center;
   padding-bottom: 5px;
 }
@@ -33,12 +33,10 @@
   justify-content: space-evenly;
   word-spacing: 0;
   text-align: justify;
-  
 }
-.Box1a > p{
+.Box1a > p {
   width: 1000px;
 }
-
 
 .box1 img {
   margin-right: 20px;
@@ -47,7 +45,6 @@
 p {
   margin: 0px;
   width: 700px;
-  
 }
 
 .box2 {

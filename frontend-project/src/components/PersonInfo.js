@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import TMDBCard from "./TMDBCard";
 import "../styles/personInfo.css";
 
-
 const PersonInfo = ({ tmdbID }) => {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);
@@ -71,8 +70,6 @@ const PersonInfo = ({ tmdbID }) => {
     }
 
     let acting = [];
-    // let other = []; // for listing crew credits (producing, directing, etc)
-    // need to link all of these movies/credits => get the credit_id? and media_type => get the id? => get the tmdb_id? => rdy to link?
     if (credits !== []) {
       if (`cast` in credits) {
         credits.cast.forEach((element, i) => {
@@ -112,16 +109,20 @@ const PersonInfo = ({ tmdbID }) => {
 
     return (
       <div>
-        
         <h1>{person["name"]}</h1>
 
         <div className="Personal">
           {`profile_path` in person ? (
             person["profile_path"] ? (
-              <img src={image} alt={`poster of ` + person["name"]} height="300px" width="250px"></img>
+              <img
+                src={image}
+                alt={`poster of ` + person["name"]}
+                height="300px"
+                width="250px"
+              ></img>
             ) : (
-            <></>
-          )
+              <></>
+            )
           ) : (
             <></>
           )}
@@ -135,7 +136,7 @@ const PersonInfo = ({ tmdbID }) => {
           ) : (
             <></>
           )}
-          
+
           {`place_of_birth` in person ? (
             person["place_of_birth"] ? (
               <p>Place of birth: {person["place_of_birth"]}</p>
@@ -164,7 +165,6 @@ const PersonInfo = ({ tmdbID }) => {
             <></>
           )}
 
-          
           {`deathday` in person ? (
             person["deathday"] ? (
               <p>Died: {person["deathday"]}</p>
@@ -174,7 +174,6 @@ const PersonInfo = ({ tmdbID }) => {
           ) : (
             <></>
           )}
-        
         </div>
         <div className="MovList">
           {acting !== [] ? (
@@ -185,29 +184,9 @@ const PersonInfo = ({ tmdbID }) => {
             <></>
           )}
         </div>
-      </div>  
-      
+      </div>
     );
   }
 };
 
 export default PersonInfo;
-
-/**
- * Example series of calls:
- * https://api.themoviedb.org/3/person/287?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
- * done*
- *
- * https://api.themoviedb.org/3/person/287/combined_credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
- * OR
- * https://api.themoviedb.org/3/person/287/movie_credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
- * and
- * https://api.themoviedb.org/3/person/287/tv_credits?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
- *
- * Maybe use something like https://jsfiddle.net/davidliang2008/cu0p613v/ to collapse/expand list of credits?
- *
- * then to get more info about a credit:
- * https://api.themoviedb.org/3/credit/5d294e6ba294f00c1729118d?api_key=b0011e93f013cfbed3110a3729a3e3c5&language=en-US
- *
- *
- */

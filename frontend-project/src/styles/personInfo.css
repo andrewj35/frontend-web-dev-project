@@ -1,37 +1,31 @@
 a:link {
   color: rgb(32, 32, 245);
 }
-.Personal{
+.Personal {
   display: flex;
   flex-wrap: wrap;
   float: left;
   width: 100%;
   overflow: hidden;
-  
-      
 }
-.Personal > img{
-  
+.Personal > img {
   justify-content: center;
   align-content: center;
 }
-.Personal > p{
+.Personal > p {
   text-align: justify;
   margin-left: 0%;
   width: 100%;
-
 }
 
 #grid-item {
-  
   border-radius: 0.5em;
   border-style: solid;
   border-width: 1px;
   width: 210px;
   overflow: hidden;
   margin: 2px;
-  display: inline-block;    
-  
+  display: inline-block;
 }
 
 #grid-item:hover,
@@ -40,19 +34,16 @@ a:link {
   color: #0275d8;
   text-decoration-color: #0275d8;
   transform: scale(1.04);
-  
 }
-figure{
+figure {
   width: 210px;
 }
 
 div.grid-item figure img {
-  
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   height: 306px;
   width: 210px;
-  
 }
 
 figcaption {
