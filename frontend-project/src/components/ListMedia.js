@@ -9,10 +9,10 @@ const ListMedia = (props) => {
   const [error, setError] = useState(null);
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(false);
-  let [page, setPage] = useState(parseInt(props["page"]));
-  let [total_pages, setTotal_pages] = useState(1);
+  const [page, setPage] = useState(parseInt(props["page"]));
+  const [total_pages, setTotal_pages] = useState(1);
 
-  let param = props["param"];
+  const param = props["param"];
 
   useEffect(() => {
     const fetchMedia = async () => {

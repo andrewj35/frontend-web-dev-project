@@ -36,9 +36,6 @@ const PersonLink = ({ id, last, personName }) => {
     fetchInfo();
   }, [id]);
 
-  // console.log(typeof personName);
-  // console.log(credits);
-
   if (error) {
     return <div>Error: {error.messsage}</div>;
   } else if (loading) {
@@ -54,7 +51,7 @@ const PersonLink = ({ id, last, personName }) => {
           href={baseURL + person["tmdb_id"] + "/person/" + person["id"]}
           key={id}
         >
-          {name}{" "}
+          {name}
         </a>
       );
     } else {

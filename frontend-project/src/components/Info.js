@@ -33,9 +33,9 @@ export default function Info(props) {
   // Array of objects, if omdb call wasn't successful, to output
   const [tmdb, setTmdb] = useState([]);
 
-  let [type] = useState(props["match"]["params"]["mediaType"]);
-  let [id] = useState(props["match"]["params"]["imdbID"]);
-  let [tmdbID] = useState(props["match"]["params"]["tmdbID"]);
+  const [type] = useState(props["match"]["params"]["mediaType"]);
+  const [id] = useState(props["match"]["params"]["imdbID"]);
+  const [tmdbID] = useState(props["match"]["params"]["tmdbID"]);
 
   useEffect(() => {
     const fetchMedia = async () => {
@@ -120,7 +120,10 @@ export default function Info(props) {
           .then((res) => res.json())
           .catch((error) => console.error("fetch error:", error));
 
-      if (resCredits.length === 0 && tmdbID) {
+      if (
+        (resCredits.length === undefined || resCredits.length === 0) &&
+        tmdbID
+      ) {
         resCredits = await fetch(
           "https://api.themoviedb.org/3/" +
             type +
@@ -145,8 +148,8 @@ export default function Info(props) {
   } else if (loading) {
     return <></>;
   } else {
+    // console.log(media);
     if (omdb && media && tmdb !== []) {
-      // console.log(media);
       return (
         <div className="container">
           <h2>
@@ -172,7 +175,7 @@ export default function Info(props) {
 
             {tmdb.length !== 0 && `cast` in tmdb ? (
               <p>
-                Cast:{" "}
+                Cast:
                 {tmdb["cast"].map((each, i) =>
                   i === tmdb["cast"].length - 1 ? (
                     <PersonLink
