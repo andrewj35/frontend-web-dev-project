@@ -58,7 +58,7 @@ export default function Results(props) {
   } else if (loading) {
     return <></>;
   } else {
-    if (resultsArray.length === 0) {
+    if (!resultsArray) {
       return (
         <>
           <h2>No results</h2>
