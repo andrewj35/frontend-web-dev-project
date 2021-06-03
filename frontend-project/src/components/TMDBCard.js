@@ -79,11 +79,6 @@ const TMDBCard = ({ type, id, element, title, year }) => {
   } else if (loading) {
     return <></>;
   } else {
-    // we may need to link, I'll ask Caterina though
-    // <Link to={{ pathname: "/info", search: "id=" + url, hash: "" }}>
-
-    // console.log(element);
-
     // error checking for edge cases when title isn't named something we would normally expect
     if (!(`title` in element)) {
       if (!(`original_title` in element)) {

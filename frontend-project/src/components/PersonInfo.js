@@ -100,7 +100,6 @@ const PersonInfo = ({ tmdbID }) => {
               ) : (
                 <></>
               )}
-              {/* <p>{element["title"]}</p> */}
             </div>
           );
         });
@@ -109,7 +108,12 @@ const PersonInfo = ({ tmdbID }) => {
 
     return (
       <div>
-        <h1>{person["name"]}</h1>
+        {person["name"] ? (
+          <h1>{person["name"]}</h1>
+        ) : (
+          // if the id in the url isn't a valid id
+          <h1>Unknown actor</h1>
+        )}
 
         <div className="Personal">
           {`profile_path` in person ? (
@@ -121,9 +125,11 @@ const PersonInfo = ({ tmdbID }) => {
                 width="250px"
               ></img>
             ) : (
+              // profile path not in object
               <></>
             )
           ) : (
+            // profile path no in object
             <></>
           )}
 
@@ -133,11 +139,13 @@ const PersonInfo = ({ tmdbID }) => {
                 <b>Birthday :</b> {person["birthday"]}
               </p>
             ) : (
+              // unknown/unrecorded birthday
               <p>
                 <b>Birthday :</b> Unknown
               </p>
             )
           ) : (
+            // if there is no birthday in the object
             <></>
           )}
 
@@ -147,11 +155,13 @@ const PersonInfo = ({ tmdbID }) => {
                 <b>Place of birth :</b> {person["place_of_birth"]}
               </p>
             ) : (
+              // unknown/unrecorded place of birth
               <p>
                 <b>Place of birth :</b> Unknown
               </p>
             )
           ) : (
+            // if there is no place of birth in the object
             <></>
           )}
           {`biography` in person ? (
@@ -160,9 +170,11 @@ const PersonInfo = ({ tmdbID }) => {
                 <b>About :</b> {person["biography"]}
               </p>
             ) : (
+              // if they don't have a biography - newer actors don't
               <></>
             )
           ) : (
+            // homepage not in the object
             <></>
           )}
           {`homepage` in person ? (
@@ -171,9 +183,11 @@ const PersonInfo = ({ tmdbID }) => {
                 <b>Homepage</b>
               </a>
             ) : (
+              // if they don't have a homepage
               <></>
             )
           ) : (
+            // homepage not in the record
             <></>
           )}
 
@@ -183,24 +197,32 @@ const PersonInfo = ({ tmdbID }) => {
                 <b>Died :</b> {person["deathday"]}
               </p>
             ) : (
+              // may or not be dead
               <></>
             )
           ) : (
+            // deathday not in the object
             <></>
           )}
         </div>
-        <div className="MovList">
-          {acting !== [] ? (
-            <div>
-              <h2>
-                <b>Acting credits :</b>
-              </h2>{" "}
-              {acting}
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
+        {person["name"] ? (
+          <div className="MovList">
+            {acting !== [] ? (
+              <div>
+                <h2>
+                  <b>Acting credits :</b>
+                </h2>{" "}
+                {acting}
+              </div>
+            ) : (
+              // should never be no acting credits, or else how are they in the database
+              <></>
+            )}
+          </div>
+        ) : (
+          // if the url contains two ids that are unknown in either database output nothing
+          <></>
+        )}
       </div>
     );
   }

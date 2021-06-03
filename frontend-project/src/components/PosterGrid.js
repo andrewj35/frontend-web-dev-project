@@ -14,7 +14,6 @@ const PosterGrid = ({ media, loading, param }) => {
         let title = "title";
         let year = "release_date";
         let type = "/movie/";
-        // console.log(param);
         if (param === "/tv/popular" || param === "/tv/top_rated") {
           title = "name";
           year = "first_air_date";
@@ -36,9 +35,7 @@ const PosterGrid = ({ media, loading, param }) => {
             type = "/person/";
           }
         }
-        // console.log(element);
         items.push(
-          // <div className="grid-item" id="grid-item" tabIndex={count} key={count}>
           <div className="grid-item" id="grid-item" key={count}>
             <TMDBCard
               type={type}
@@ -54,7 +51,7 @@ const PosterGrid = ({ media, loading, param }) => {
     } else {
       return (
         <>
-          <div className="grid-container">No matches found</div>
+          <div>No matches found</div>
         </>
       );
     }
