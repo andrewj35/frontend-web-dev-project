@@ -1,7 +1,6 @@
 import ListMedia from "./ListMedia";
 
 export default function PopMovies(props) {
-  // console.log(props["match"]["params"]["pageNumber"]);
   return (
     <div>
       <h1>Popular Movies</h1>

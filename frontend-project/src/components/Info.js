@@ -4,21 +4,6 @@ import PersonLink from "./PersonLink";
 import Person from "./PersonInfo";
 import "../styles/Info.css";
 
-/**
- * Maybe be worth it to look into switching our tmdb search calls to
- * https://developers.themoviedb.org/3/find/find-by-id
- *
- * Edge case movies to test:
- * Mortal Kombal (omdb + tmdb)
- * 22 vs earth (only in tmdb, not omdb)
- * No-Input Pixels (no imdb id, no cast, only director)
- *
- * Things we can still output:
- * - providers (tmdb)
- * - display person page (output information - tmdb)
- * -
- */
-
 export default function Info(props) {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);
@@ -144,8 +129,8 @@ export default function Info(props) {
   } else if (loading) {
     return <></>;
   } else {
+    // if we have omdb, media, and tmdb isn't empty aka movie
     if (omdb && media && tmdb !== []) {
-      console.log(media);
       return (
         <div className="container">
           {`Title` in media && `Year` in media ? (
@@ -283,7 +268,7 @@ export default function Info(props) {
           )}
         </div>
       );
-      // tmdb only and a person wasn't selected
+      // tv show
     } else if (type !== "person") {
       return (
         <div className="container">

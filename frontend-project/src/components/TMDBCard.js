@@ -88,19 +88,16 @@ const TMDBCard = ({ type, id, element, title, year }) => {
       }
     }
 
-    let image = "https://image.tmdb.org/t/p/original/";
+    let image =
+      "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
     if (!element["poster_path"] && omdb && !element["backdrop_path"]) {
       image = secondaryUrl;
     } else if (element["media_type"] === "person" && element["profile_path"]) {
-      image = image + element["profile_path"];
+      image = "https://image.tmdb.org/t/p/original/" + element["profile_path"];
     } else if (element["poster_path"]) {
-      image = image + element["poster_path"];
+      image = "https://image.tmdb.org/t/p/original/" + element["poster_path"];
     } else if (element["backdrop_path"]) {
-      image = image + element["backdrop_path"];
-    } else {
-      // no image available - from wiki
-      image =
-        "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
+      image = "https://image.tmdb.org/t/p/original/" + element["backdrop_path"];
     }
 
     return (

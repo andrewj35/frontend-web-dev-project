@@ -11,7 +11,6 @@ const ListMedia = (props) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(parseInt(props["page"]));
   const [total_pages, setTotal_pages] = useState(1);
-
   const param = props["param"];
 
   useEffect(() => {
