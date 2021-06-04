@@ -55,18 +55,12 @@ const PersonInfo = ({ tmdbID }) => {
   } else if (loading) {
     return <></>;
   } else {
-    console.log(credits);
-    let image = "https://image.tmdb.org/t/p/original/";
+    let image =
+      "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
     if (person) {
       if (person["profile_path"]) {
-        image = image + person["profile_path"];
-      } else {
-        image =
-          "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
+        image = "https://image.tmdb.org/t/p/original/" + person["profile_path"];
       }
-    } else {
-      image =
-        "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
     }
 
     let acting = [];
