@@ -163,8 +163,8 @@ export default function Info(props) {
             ) : (
               // Poster isn't in media
               <></>
-            )}
-
+            )}</div>
+          <div className="Box1a">
             {`Plot` in media ? (
               media["Plot"] ? (
                 <p>Plot: {media["Plot"]}</p>

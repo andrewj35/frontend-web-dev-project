@@ -1,5 +1,6 @@
 .container {
   border: 1px;
+  
 }
 
 * {
@@ -17,11 +18,7 @@
   float: left;
   flex-wrap: wrap;
   flex-direction: column;
-  padding: 10px;
-  height: 400px;
-  width: 600px;
-  justify-content: space-evenly;
-  margin-top: 20px;
+  
 }
 
 .Box1a {
@@ -101,9 +98,9 @@ p {
     max-width: 100%;
   }
   img {
-    width: 130px;
-    height: 170px;
-    margin-left: 50%;
+    width: 170px;
+    height: 200px;
+    margin: 0 50%;
   }
 
   .box2 {
