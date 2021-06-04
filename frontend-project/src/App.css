@@ -2,11 +2,11 @@
 h1 {
   text-align: center;
 }
-
+/*
 .hidden {
   visibility: hidden;
 }
-
+*/
 #root {
   color: rgb(240, 248, 255);
   background: linear-gradient(rgba(1, 1, 1, 0.9), rgba(34, 33, 33, 0.9)),
@@ -77,4 +77,36 @@ div.grid-item a {
 }
 #nav {
   justify-content: space-evenly;
+}
+
+@media (min-width: 1089px) and (max-width: 1265px) {
+  div .form-group #searchBar{
+      width: 100px; 
+      margin-top: 2px;
+
+  }
+  
+}
+@media (min-width: 990px) and (max-width: 1088px) {
+
+  div #nav{
+    max-width: 540px;
+  }
+
+  div #nav a{
+    padding: 1px;
+    
+    text-align: center;
+  }
+  div .form-group #searchBar{
+    width: 100px; 
+    margin-top: 2px;
+  }
+  
+  div button .btn btn-outline-light{
+    width: 50px;
+}
+  form #search-form{
+    margin: 0;
+  }
 }
