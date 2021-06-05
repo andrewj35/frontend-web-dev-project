@@ -133,8 +133,9 @@ figcaption {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
+  background-color: #02060a;
   border-color: #007bff;
+  font-weight: bold;
 }
 
 .page-item.disabled .page-link {
@@ -143,6 +144,7 @@ figcaption {
   cursor: auto;
   background-color: #fff;
   border-color: #dee2e6;
+
 }
 
 .sr-only {
@@ -155,4 +157,9 @@ figcaption {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.pagination .page-item a:link{
+  color: rgb(156, 107, 58);
+  font-weight: bold;
 }

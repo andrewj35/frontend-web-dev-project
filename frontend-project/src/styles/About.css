@@ -1,5 +1,7 @@
 .About {
   padding-bottom: 50px;
+  height: 100vh;
+  margin-top: 40px;
 }
 
 .About .info p {
@@ -16,11 +18,20 @@
 .info > p{
     text-align: justify;
     width: 100%;
+    color: rgb(156, 107, 58);  
+    font-weight: 600;
+}
+
+.description h3{
+  color: rgb(156, 107, 58);  
+  font-weight: bold;
 }
 
 .description > p{
     text-align: justify;
     width: 100%;
+    color: rgb(156, 107, 58);  
+    font-weight: 600;
 }
 
 /* @media (max-width: 414px) {

@@ -85,6 +85,10 @@ div.grid-item a {
   justify-content: space-evenly;
 }
 
+div .navbar-collapse{
+  background: rgb(7, 7, 7);
+}
+
 @media (min-width: 1089px) and (max-width: 1265px) {
   div .form-group #searchBar{
       width: 100px; 
