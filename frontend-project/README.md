@@ -68,3 +68,32 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Project Information
+
+We used Reactjs (HTML, CSS, Javascript) to create this application, as well as the following:
+
+Bootstrap spacing via class: https://mdbootstrap.com/docs/react/utilities/spacing/
+React bootstrap navbars: https://react-bootstrap.github.io/components/navbar/
+
+Libraries installed for project:
+react-router-dom, react-chartjs-2, and react-js-pagination
+
+### APIs
+
+OMDb API:
+https://www.omdbapi.com/
+
+- Limited to 1000 calls per week
+
+The Movie Database API
+https://www.themoviedb.org/
+
+- No call limit
+  Note: This allows us to query for things such as top rated movies, popular movies, people, and more.
+
+API calls made, and error handling set up, per reactjs documentation: https://reactjs.org/docs/faq-ajax.html (hooks)
+
+Our 404 Page Not Found layout was found online free at:
+https://freefrontend.com/html-funny-404-pages/ By Naved khan
+which was just a fun thing we thought we'd throw in.
