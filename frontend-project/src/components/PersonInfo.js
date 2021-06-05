@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import TMDBCard from "./TMDBCard";
 import "../styles/personInfo.css";
 
+/**
+ *
+ * @param {*} param0
+ * @returns information fetched from TMDB, if successfulled fetched
+ */
 const PersonInfo = ({ tmdbID }) => {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);

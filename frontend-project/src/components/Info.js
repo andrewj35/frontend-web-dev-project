@@ -4,6 +4,14 @@ import PersonLink from "./PersonLink";
 import Person from "./PersonInfo";
 import "../styles/Info.css";
 
+/**
+ *
+ * @param {mediaType, imdbID, tmdbID} props
+ * mediaType => valid strings: movie, tv, person
+ * imdbID => if the returned object, using this id, is valid, the id was valid
+ * tmdbID => if the returned object, using this id, is valid, the id was valid
+ * @returns Info page based on params in the url
+ */
 export default function Info(props) {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);
@@ -23,6 +31,9 @@ export default function Info(props) {
   const [tmdbID] = useState(props["match"]["params"]["tmdbID"]);
 
   useEffect(() => {
+    // fetches the media and tmdb arrays, and potentially the ratings array
+    // if call to omdb API was successful, omdb hook will be true, else false
+    // and tmdb call made
     const fetchMedia = async () => {
       setLoading(true);
       const res = await fetch(

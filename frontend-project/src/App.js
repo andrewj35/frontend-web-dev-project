@@ -112,7 +112,7 @@ class Main extends React.Component {
 
             <Form id="search-form" inline onSubmit={this.afterSubmission}>
               <FormGroup>
-              <Form.Label className="hidden" htmlFor="searchBar">
+                <Form.Label className="hidden" htmlFor="searchBar">
                   Search
                 </Form.Label>
                 <FormControl
@@ -166,6 +166,7 @@ class Main extends React.Component {
           <Redirect exact path="/results/:title/" to="/results/:title/1" />
           <Route exact path="/results/:title/:page" component={Results} />
 
+          {/* 404 not found page when invalid url input */}
           <Route component={NotFound} />
         </Switch>
       </div>

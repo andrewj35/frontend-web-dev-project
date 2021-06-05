@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import "../styles/personInfo.css";
 
+/**
+ *
+ * @param {*} param0
+ * @returns a person's name properly linked so it will open the person's page
+ * when selected
+ */
 const PersonLink = ({ id, last, personName }) => {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);

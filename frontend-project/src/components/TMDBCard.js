@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 
+/**
+ * @param {*} param0
+ * @returns a linked poster of the media (movie, tv show, person)
+ */
 const TMDBCard = ({ type, id, element, title, year }) => {
   // error handling so we don't swallow exceptions from actual bugs in components
   const [error, setError] = useState(null);

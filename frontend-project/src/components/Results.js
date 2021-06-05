@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import PosterGrid from "./PosterGrid";
 import Pagination from "react-js-pagination";
 
+/**
+ * Lists the results of the queried string in a poster grid layout with pagination
+ * @param {*} props
+ * @returns
+ */
 export default function Results(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);

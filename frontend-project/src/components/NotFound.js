@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import "../styles/NotFound.css";
 
+/**
+ *
+ * @returns a funny not found page I found online at https://freefrontend.com/html-funny-404-pages/
+ */
 export default function NotFound() {
   return (
     <section className="page_404">
