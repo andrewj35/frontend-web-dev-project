@@ -1,6 +1,7 @@
 a:link {
   color: peru;
 }
+
 .Personal {
   display: flex;
   flex-wrap: wrap;
@@ -8,10 +9,12 @@ a:link {
   width: 100%;
   overflow: hidden;
 }
+
 .Personal > img {
   justify-content: center;
   align-content: center;
 }
+
 .Personal > p {
   text-align: justify;
   margin-left: 0%;
@@ -35,6 +38,7 @@ a:link {
   text-decoration-color: #0275d8;
   transform: scale(1.04);
 }
+
 figure {
   width: 210px;
 }
