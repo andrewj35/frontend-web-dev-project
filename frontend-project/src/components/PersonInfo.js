@@ -67,7 +67,6 @@ const PersonInfo = ({ tmdbID }) => {
     if (credits !== []) {
       if (`cast` in credits) {
         credits.cast.forEach((element, i) => {
-          console.log(`/` + element["media_type"] + `/`);
           let title = "title";
           let year = "release_date";
           let type = "/movie/";

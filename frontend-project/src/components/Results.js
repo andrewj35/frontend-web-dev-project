@@ -66,6 +66,7 @@ export default function Results(props) {
       return (
         <div>
           <h1>Results for: {props["match"]["params"]["title"]}</h1>
+          {/* fetching results  */}
           <div className="container">
             <PosterGrid media={resultsArray} loading={loading} param={"any"} />
             <br />

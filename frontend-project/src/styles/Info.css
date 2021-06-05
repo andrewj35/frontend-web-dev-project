@@ -1,5 +1,6 @@
 .container {
   border: 1px;
+  
 }
 
 * {
@@ -17,11 +18,6 @@
   float: left;
   flex-wrap: wrap;
   flex-direction: column;
-  padding: 10px;
-  height: 400px;
-  width: 600px;
-  justify-content: space-evenly;
-  margin-top: 20px;
 }
 
 .Box1a {
@@ -78,6 +74,7 @@ p {
   .box1 img {
     width: 100px;
     height: 110px;
+    margin: 0 50%;
   }
   .Box1a p {
     width: 100%;
@@ -87,6 +84,11 @@ p {
     width: 100px;
     height: 120px;
     justify-content: space-between;
+  }
+
+  canvas #ratingsChart{
+    width: 120px;
+    height: 140px;
   }
 }
 
@@ -99,11 +101,13 @@ p {
     justify-content: space-evenly;
     font-size: 15px;
     max-width: 100%;
+    margin-left: 30%;
   }
   img {
-    width: 130px;
-    height: 170px;
-    margin-left: 50%;
+    width: 170px;
+    height: 200px;
+    justify-content: center;
+    align-content: center;
   }
 
   .box2 {
@@ -122,6 +126,7 @@ p {
     justify-content: space-evenly;
     font-size: 15px;
     max-width: 100%;
+    margin: 0 30%;
   }
   .box1 p {
     max-width: 100%;
@@ -130,4 +135,14 @@ p {
     width: 100%;
     display: block;
   }
+}
+
+@media (min-width: 1025px) {
+  .box1 {
+    justify-content: space-evenly;
+    font-size: 15px;
+    max-width: 100%;
+    margin: 0 30%;
+  }
+  
 }

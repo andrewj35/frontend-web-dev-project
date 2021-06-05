@@ -76,7 +76,7 @@ class Main extends React.Component {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav id="nav" className="mr-auto" bg="black" expand="lg">
+            <Nav id="nav" className="mr-auto" bg="black" expand="md">
               <NavLink
                 to="/movie/popular/1"
                 href="/movie/popular/1"
@@ -112,9 +112,7 @@ class Main extends React.Component {
 
             <Form id="search-form" inline onSubmit={this.afterSubmission}>
               <FormGroup>
-                <Form.Label className="hidden" htmlFor="searchBar">
-                  Search
-                </Form.Label>
+                
                 <FormControl
                   onKeyDown={this.handleKeyPress}
                   type="text"

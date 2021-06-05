@@ -129,7 +129,6 @@ export default function Info(props) {
   } else if (loading) {
     return <></>;
   } else {
-    // console.log(media, tmdb);
     // if we have omdb, media, and tmdb isn't empty aka movie
     if (omdb && media && tmdb !== []) {
       return (
@@ -165,7 +164,8 @@ export default function Info(props) {
               // Poster isn't in media
               <></>
             )}
-
+          </div>
+          <div className="Box1a">
             {`Plot` in media ? (
               media["Plot"] ? (
                 <p>Plot: {media["Plot"]}</p>
