@@ -215,12 +215,7 @@ export default function Info(props) {
             )}
 
             {`Director` in media ? (
-              media["Director"] ? (
-                <p>Director(s): {media["Director"]}</p>
-              ) : (
-                // is empty
-                <></>
-              )
+              <p>Director(s): {media["Director"]}</p>
             ) : (
               // isn't in object
               <></>
