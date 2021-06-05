@@ -282,9 +282,10 @@ export default function Info(props) {
             <h2>Unknown {type}</h2>
           )}
           {`release_date` in media || `overview` in media ? (
-            <div className="TMDB-box">
+          <div className="TMDB-box"><center>
               {`release_date` in media ? (
                 media["release_date"] ? (
+                  
                   <img
                     height="350px"
                     width="350px"
@@ -312,6 +313,8 @@ export default function Info(props) {
               ) : (
                 <></>
               )}
+              
+                
               {`overview` in media ? (
                 media["overview"] ? (
                   <p>
@@ -324,7 +327,7 @@ export default function Info(props) {
                 )
               ) : (
                 <></>
-              )}
+              )}</center>
             </div>
           ) : (
             <></>
@@ -335,7 +338,7 @@ export default function Info(props) {
           `production_companies` in media ||
           `crew` in tmdb ||
           `homepage` in media ? (
-            <div className="TMDB-box2">
+            <div className="TMDB-box2"><center>
               {`cast` in tmdb ? (
                 tmdb["cast"] ? (
                   <p>
@@ -382,7 +385,7 @@ export default function Info(props) {
               {`production_companies` in media ? (
                 media["production_companies"] ? (
                   <p>
-                    Production Companies: <br></br>
+                    <b>  Production Companies : </b>
                     {media["production_companies"].map((each, i) =>
                       i === media["production_companies"].length - 1
                         ? each["name"]
@@ -395,11 +398,11 @@ export default function Info(props) {
               ) : (
                 <></>
               )}
-
+              <br/>
               {`crew` in tmdb ? (
                 tmdb["crew"] ? (
                   tmdb["crew"].map((each) => (
-                    <p key={each["name"]}>
+                    <p key={each["name"]}><br/>
                       {each["job"] + `: ` + each["name"]}
                     </p>
                   ))
@@ -409,11 +412,11 @@ export default function Info(props) {
               ) : (
                 <></>
               )}
-
+              <br/>
               {`homepage` in media ? (
                 media["homepage"] ? (
                   <a href={media["homepage"]} key={media["homepage"]}>
-                    Homepage
+                    <b>Homepage</b>
                   </a>
                 ) : (
                   // homepage not set
@@ -422,7 +425,7 @@ export default function Info(props) {
               ) : (
                 // homepage not in object
                 <></>
-              )}
+              )}</center>
             </div>
           ) : (
             <></>
