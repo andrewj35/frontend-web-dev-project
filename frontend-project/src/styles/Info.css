@@ -96,7 +96,7 @@ div .TMDB-box img{
   font-weight: 600;
 }
 
-div .TMDB-box2 > a:link {
+.TMDB-box2 > a:link b {
   color: rgb(156, 107, 58);
   font-weight: bold;
 }

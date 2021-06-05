@@ -2,6 +2,12 @@ a:link {
   color: peru;
 }
 
+div h1{
+
+  color: rgb(156, 107, 58);  
+  font-weight: bold;
+}
+
 .Personal {
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +25,8 @@ a:link {
   text-align: justify;
   margin-left: 0%;
   width: 100%;
+  color: rgb(156, 107, 58);  
+  font-weight: 600;
 }
 
 #grid-item {
@@ -61,31 +69,54 @@ figcaption {
   margin-top: 1px;
   font-size: 14px;
   font-weight: 500;
-  color: rgb(255, 255, 255);
+  color: rgb(156, 107, 58);  
+  font-weight: 600;
+}
+
+.grid-item p{
+  color: rgb(156, 107, 58);  
+  font-weight: 600;
+}
+
+.Personal > a:link b{
+  color: rgb(156, 107, 58);  
+  font-weight: bold;
+}
+
+.MovList h2{
+  color: rgb(156, 107, 58);  
+  font-weight: 600;
 }
 
 @media (max-width: 414px) {
+
   .Personal img {
     margin: 0 10px;
   }
+
   .Personal {
     font-size: 15px;
   }
+
   .MovList #grid-item {
     margin-left: 20%;
   }
+
   figure {
     width: 0px;
   }
 }
 
 @media (max-width: 768px) {
+  
   .Personal > img {
     margin: 0 50%;
   }
+
   figure {
     width: 0px;
   }
+  
   .MovList {
     margin-left: 10px;
   }
