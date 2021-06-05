@@ -214,7 +214,17 @@ export default function Info(props) {
               <></>
             )}
 
-            <p>Director(s): {media["Director"]}</p>
+            {`Director` in media ? (
+              media["Director"] ? (
+                <p>Director(s): {media["Director"]}</p>
+              ) : (
+                // is empty
+                <></>
+              )
+            ) : (
+              // isn't in object
+              <></>
+            )}
 
             {tmdb.length !== 0 && `cast` in tmdb ? (
               <p>
@@ -306,54 +316,54 @@ export default function Info(props) {
             <h2>Unknown {type}</h2>
           )}
           {`release_date` in media || `overview` in media ? (
-          <div className="TMDB-box"><center>
-              {`release_date` in media ? (
-                media["release_date"] ? (
-                  
-                  <img
-                    height="350px"
-                    width="350px"
-                    src={
-                      `https://image.tmdb.org/t/p/original/` +
-                      media["poster_path"]
-                    }
-                    alt={
-                      `poster for ` +
-                      media["title"] +
-                      ` (` +
-                      media["release_date"].slice(0, 4) +
-                      `)`
-                    }
-                  />
+            <div className="TMDB-box">
+              <center>
+                {`release_date` in media ? (
+                  media["release_date"] ? (
+                    <img
+                      height="350px"
+                      width="350px"
+                      src={
+                        `https://image.tmdb.org/t/p/original/` +
+                        media["poster_path"]
+                      }
+                      alt={
+                        `poster for ` +
+                        media["title"] +
+                        ` (` +
+                        media["release_date"].slice(0, 4) +
+                        `)`
+                      }
+                    />
+                  ) : (
+                    <img
+                      src={
+                        `https://image.tmdb.org/t/p/original/` +
+                        media["poster_path"]
+                      }
+                      alt={`poster for ` + media["title"]}
+                    />
+                  )
                 ) : (
-                  <img
-                    src={
-                      `https://image.tmdb.org/t/p/original/` +
-                      media["poster_path"]
-                    }
-                    alt={`poster for ` + media["title"]}
-                  />
-                )
-              ) : (
-                <></>
-              )}
-              
-                
-              {`overview` in media ? (
-                media["overview"] ? (
-                  <p>
-                    <br></br>
-                    <b>Overview: </b>
-                    <br></br> {media["overview"]}
-                  </p>
-                ) : (
-                  // is empty
                   <></>
-                )
-              ) : (
-                // isn't in object
-                <></>
-              )}</center>
+                )}
+
+                {`overview` in media ? (
+                  media["overview"] ? (
+                    <p>
+                      <br></br>
+                      <b>Overview: </b>
+                      <br></br> {media["overview"]}
+                    </p>
+                  ) : (
+                    // is empty
+                    <></>
+                  )
+                ) : (
+                  // isn't in object
+                  <></>
+                )}
+              </center>
             </div>
           ) : (
             <></>
@@ -364,98 +374,101 @@ export default function Info(props) {
           `production_companies` in media ||
           `crew` in tmdb ||
           `homepage` in media ? (
-            <div className="TMDB-box2"><center>
-              {`cast` in tmdb ? (
-                tmdb["cast"] ? (
-                  <p>
-                    <br></br>
-                    Cast: <br></br>
-                    {tmdb["cast"].map((each, i) =>
-                      i === tmdb["cast"].length - 1 ? (
-                        <PersonLink
-                          key={each["id"]}
-                          id={each["id"]}
-                          last={true}
-                          personName={each["name"]}
-                        />
-                      ) : (
-                        // each["name"] + `, `
-                        <PersonLink
-                          key={each["id"]}
-                          id={each["id"]}
-                          last={false}
-                          personName={each["name"]}
-                        />
-                      )
-                    )}
-                  </p>
-                ) : (
-                  // cast is empty - haven't seen a case but just in case we have this
-                  <></>
-                )
-              ) : (
-                // cast not in object
-                <></>
-              )}
-              {`budget` in media ? (
-                media["budget"] ? (
-                  <p key={media["budget"]}>Budget: {media["budget"]}</p>
-                ) : (
-                  // budget not set
-                  <></>
-                )
-              ) : (
-                // budget not in media
-                <></>
-              )}
-              {`production_companies` in media ? (
-                media["production_companies"] ? (
-                  <p>
-                    <b>  Production Companies : </b>
-                    {media["production_companies"].map((each, i) =>
-                      i === media["production_companies"].length - 1
-                        ? each["name"]
-                        : each["name"] + `, `
-                    )}
-                  </p>
-                ) : (
-                  // is empty
-                  <></>
-                )
-              ) : (
-                // isn't in object
-                <></>
-              )}
-              <br/>
-              {`crew` in tmdb ? (
-                tmdb["crew"] ? (
-                  tmdb["crew"].map((each) => (
-                    <p key={each["name"]}><br/>
-                      {each["job"] + `: ` + each["name"]}
+            <div className="TMDB-box2">
+              <center>
+                {`cast` in tmdb ? (
+                  tmdb["cast"] ? (
+                    <p>
+                      <br></br>
+                      Cast: <br></br>
+                      {tmdb["cast"].map((each, i) =>
+                        i === tmdb["cast"].length - 1 ? (
+                          <PersonLink
+                            key={each["id"]}
+                            id={each["id"]}
+                            last={true}
+                            personName={each["name"]}
+                          />
+                        ) : (
+                          // each["name"] + `, `
+                          <PersonLink
+                            key={each["id"]}
+                            id={each["id"]}
+                            last={false}
+                            personName={each["name"]}
+                          />
+                        )
+                      )}
                     </p>
-                  ))
+                  ) : (
+                    // cast is empty - haven't seen a case but just in case we have this
+                    <></>
+                  )
                 ) : (
-                  // is empty
+                  // cast not in object
                   <></>
-                )
-              ) : (
-                // isn't in object
-                <></>
-              )}
-              <br/>
-              {`homepage` in media ? (
-                media["homepage"] ? (
-                  <a href={media["homepage"]} key={media["homepage"]}>
-                    <b>Homepage</b>
-                  </a>
+                )}
+                {`budget` in media ? (
+                  media["budget"] ? (
+                    <p key={media["budget"]}>Budget: {media["budget"]}</p>
+                  ) : (
+                    // budget not set
+                    <></>
+                  )
                 ) : (
-                  // homepage not set
+                  // budget not in media
                   <></>
-                )
-              ) : (
-                // homepage not in object
-                <></>
-              )}</center>
+                )}
+                {`production_companies` in media ? (
+                  media["production_companies"] ? (
+                    <p>
+                      <b> Production Companies : </b>
+                      {media["production_companies"].map((each, i) =>
+                        i === media["production_companies"].length - 1
+                          ? each["name"]
+                          : each["name"] + `, `
+                      )}
+                    </p>
+                  ) : (
+                    // is empty
+                    <></>
+                  )
+                ) : (
+                  // isn't in object
+                  <></>
+                )}
+                <br />
+                {`crew` in tmdb ? (
+                  tmdb["crew"] ? (
+                    tmdb["crew"].map((each) => (
+                      <p key={each["name"]}>
+                        <br />
+                        {each["job"] + `: ` + each["name"]}
+                      </p>
+                    ))
+                  ) : (
+                    // is empty
+                    <></>
+                  )
+                ) : (
+                  // isn't in object
+                  <></>
+                )}
+                <br />
+                {`homepage` in media ? (
+                  media["homepage"] ? (
+                    <a href={media["homepage"]} key={media["homepage"]}>
+                      <b>Homepage</b>
+                    </a>
+                  ) : (
+                    // homepage not set
+                    <></>
+                  )
+                ) : (
+                  // homepage not in object
+                  <></>
+                )}
+              </center>
             </div>
           ) : (
             <></>
