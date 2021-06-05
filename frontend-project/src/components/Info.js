@@ -129,6 +129,7 @@ export default function Info(props) {
   } else if (loading) {
     return <></>;
   } else {
+    // console.log(media, tmdb);
     // if we have omdb, media, and tmdb isn't empty aka movie
     if (omdb && media && tmdb !== []) {
       return (
@@ -188,6 +189,19 @@ export default function Info(props) {
               <></>
             )}
 
+            {`Rated` in media ? (
+              media["Rated"] ? (
+                <p key={media["Rated"]}>Rating: {media["Rated"]}</p>
+              ) : (
+                // is empty
+                <></>
+              )
+            ) : (
+              // isn't in object
+
+              <></>
+            )}
+
             {`BoxOffice` in media ? (
               media["BoxOffice"] ? (
                 <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
@@ -226,18 +240,6 @@ export default function Info(props) {
             ) : (
               <p>Cast: {media["Actors"]}</p>
             )}
-            {`BoxOffice` in media ? (
-              media["BoxOffice"] ? (
-                <p key={media["BoxOffice"]}>Box Office: {media["BoxOffice"]}</p>
-              ) : (
-                // BoxOffice is empty
-                <></>
-              )
-            ) : (
-              // BoxOffice isn't in object
-              <></>
-            )}
-
             {`Writer` in media ? (
               media["Writer"] ? (
                 <p>Writers: {media["Writer"]}</p>
@@ -255,8 +257,30 @@ export default function Info(props) {
               // Runtime isn't in object
               <></>
             )}
-          </div>
+            {`Production` in media ? (
+              media["Production"] ? (
+                <p>Production: {media["Production"]}</p>
+              ) : (
+                // is empty
+                <></>
+              )
+            ) : (
+              // isn't in object
+              <></>
+            )}
+            {`Released` in media ? (
+              media["Released"] ? (
+                <p>Release date: {media["Released"]}</p>
+              ) : (
+                // is empty
+                <></>
+              )
+            ) : (
+              // isn't in object
 
+              <></>
+            )}
+          </div>
           {ratings ? (
             <div className="box2">
               {ratings.map((each) => (
@@ -320,9 +344,11 @@ export default function Info(props) {
                     <br></br> {media["overview"]}
                   </p>
                 ) : (
+                  // is empty
                   <></>
                 )
               ) : (
+                // isn't in object
                 <></>
               )}
             </div>
@@ -390,9 +416,11 @@ export default function Info(props) {
                     )}
                   </p>
                 ) : (
+                  // is empty
                   <></>
                 )
               ) : (
+                // isn't in object
                 <></>
               )}
 
@@ -404,9 +432,11 @@ export default function Info(props) {
                     </p>
                   ))
                 ) : (
+                  // is empty
                   <></>
                 )
               ) : (
+                // isn't in object
                 <></>
               )}
 

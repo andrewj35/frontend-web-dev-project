@@ -24,8 +24,6 @@ export default function Results(props) {
     setPage(event);
   }
 
-  // console.log(id);
-
   useEffect(() => {
     const fetchMedia = async () => {
       setLoading(true);
