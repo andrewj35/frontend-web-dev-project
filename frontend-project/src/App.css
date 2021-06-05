@@ -2,11 +2,13 @@
 h1 {
   text-align: center;
 }
-/*
+
+
 .hidden {
   visibility: hidden;
 }
-*/
+
+
 #root {
   color: rgb(240, 248, 255);
   background: linear-gradient(rgba(1, 1, 1, 0.9), rgba(34, 33, 33, 0.9)),
