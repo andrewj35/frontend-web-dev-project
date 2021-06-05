@@ -39,6 +39,7 @@ h1 {
   color: #ffffff;
   font-size: 18px;
 }
+
 .navbar-brand:hover {
   text-decoration: none;
   opacity: 0.8;
@@ -53,6 +54,7 @@ h1 {
   border-right: 5px;
   text-decoration: none;
 }
+
 .navbar-brand {
   display: block;
   text-align: left;
@@ -70,6 +72,7 @@ a {
 }
 
 /* Don't want the padding from above to affect our grid of posters */
+
 div.grid-item a {
   padding: 0;
 }
@@ -77,6 +80,7 @@ div.grid-item a {
 .active {
   padding-right: 1px;
 }
+
 #nav {
   justify-content: space-evenly;
 }
@@ -89,6 +93,7 @@ div.grid-item a {
   }
   
 }
+
 @media (min-width: 990px) and (max-width: 1088px) {
 
   div #nav{
@@ -100,6 +105,7 @@ div.grid-item a {
     
     text-align: center;
   }
+
   div .form-group #searchBar{
     width: 100px; 
     margin-top: 2px;

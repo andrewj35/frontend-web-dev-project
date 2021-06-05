@@ -11,6 +11,8 @@
 .container > h2 {
   text-align: center;
   padding-bottom: 5px;
+  color: rgb(156, 107, 58);
+  font-weight: bold;
 }
 
 .box1 {
@@ -31,8 +33,17 @@
   text-align: justify;
 }
 
+/* fixing the color of the links used */
+
 .Box1a > p {
   width: 1000px;
+  color: rgb(156, 107, 58);
+   
+}
+
+.Box1a > p a:link{
+  color: rgb(156, 107, 58);
+  font-weight: bold;
 }
 
 .box1 img {
@@ -53,12 +64,21 @@ p {
   justify-content: space-around;
 }
 
+.box2 > .chart-container > label {
+
+    color: rgb(156, 107, 58);  
+    font-weight: 600;
+}
+
+
 .TMDB-box {
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  color: rgb(156, 107, 58);  
+  font-weight: 600;
   
 }
 
@@ -72,6 +92,13 @@ div .TMDB-box img{
   width: 100%;
   justify-content: space-evenly;
   padding-bottom: 100px;
+  color: rgb(156, 107, 58);  
+  font-weight: 600;
+}
+
+.TMDB-box2 > a:link b {
+  color: rgb(156, 107, 58);
+  font-weight: bold;
 }
 
 /* layout for small devices*/
