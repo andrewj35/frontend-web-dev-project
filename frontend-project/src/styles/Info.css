@@ -30,6 +30,7 @@
   word-spacing: 0;
   text-align: justify;
 }
+
 .Box1a > p {
   width: 1000px;
 }
@@ -55,8 +56,16 @@ p {
 .TMDB-box {
   width: 100%;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  
+}
+
+div .TMDB-box img{
+  justify-content: center;
+  align-content: center;
+  
 }
 
 .TMDB-box2 {
@@ -65,21 +74,27 @@ p {
   padding-bottom: 100px;
 }
 
+/* layout for small devices*/
+
 @media (max-width: 414px) {
+
   .box1 {
     justify-content: space-evenly;
     font-size: 14px;
     max-width: 100%;
   }
+
   .box1 img {
     width: 100px;
     height: 110px;
     margin: 0 50%;
   }
+
   .Box1a p {
     width: 100%;
     display: block;
   }
+
   .chart-container canvas {
     width: 100px;
     height: 120px;
@@ -90,9 +105,36 @@ p {
     width: 120px;
     height: 140px;
   }
+
+  .TMDB-box{
+    justify-content: space-evenly;
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .TMDB-box img{
+    width: 100px;
+    height: 110px;
+    
+  }
+
+  .TMDB-box p {
+    width: 100%;
+    display: block;
+  }
+
+  .TMDB-box2 p {
+    width: 100%;
+    display: block;
+  }
+
+
 }
 
+/* layout for ipad and tablets*/
+
 @media (max-width: 768px) {
+
   .box1 p {
     width: 100%;
   }
@@ -103,6 +145,7 @@ p {
     max-width: 100%;
     margin-left: 30%;
   }
+
   img {
     width: 170px;
     height: 200px;
@@ -120,24 +163,57 @@ p {
     width: 100%;
     display: block;
   }
+
+  .TMDB-box{
+    justify-content: space-evenly;
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .TMDB-box img{
+    width: 130px;
+    height: 150px;
+    
+  }
+
+  .TMDB-box p {
+    width: 100%;
+    display: block;
+  }
+
+  .TMDB-box2 p {
+    width: 100%;
+    display: block;
+  }
+
+
+
 }
+
+/* layout for laptops*/
+
 @media (max-width: 1024px) {
+
   .box1 {
     justify-content: space-evenly;
     font-size: 15px;
     max-width: 100%;
     margin: 0 30%;
   }
+
   .box1 p {
     max-width: 100%;
   }
+
   .Box1a p {
     width: 100%;
     display: block;
   }
+
 }
 
 @media (min-width: 1025px) {
+
   .box1 {
     justify-content: space-evenly;
     font-size: 15px;
